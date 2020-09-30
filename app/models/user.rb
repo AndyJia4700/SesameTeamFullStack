@@ -30,9 +30,39 @@ class User < ApplicationRecord
     foreign_key: :leader_id,
     class_name: "Project"
 
-    
     has_many :join_project,
     foreign_key: :user_id,
     class_name: "Project"
-    
+
+    def password=(password)
+        @password = password
+        self.password_digest = BCrypt::Password.create(password)
+    end
+
+    def is_password?(password)
+        bcrypt_password = BCrypt::Password.new(self.password_digest)
+        bcrypt_password.is_password?(password)
+    end
+
+    def reset_session_token!
+        self.update!(session_token: User.generate_session_token)
+        self.session_token
+    end
+
+    def self.find_by_credentials(email, password)
+        user = User.find_by(email: email)
+        return nil unless user && user.is_password?(password)
+        user
+    end
+
+    private
+
+    def ensure_session_token
+        self.session_token ||= User.generate_session_token
+    end
+
+    def self.generate_session_token
+        SecureRandom::urlsafe_base64
+    end
+
 end
