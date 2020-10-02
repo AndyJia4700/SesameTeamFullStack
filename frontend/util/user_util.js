@@ -1,11 +1,11 @@
 export const fetchUsers = () => (
-    $ajax({
+    $.ajax({
         url: 'api/users'
     })
 );
 
 export const fetchUser = (userId) => (
-    $ajax({
+    $.ajax({
         url: `api/users/${userId}`
     })
 )
