@@ -1,0 +1,23 @@
+.modal-background{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: transparent;
+}
+
+.modal-child{
+    position: absolute;
+    top: 10%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-child-div{
+    position: absolute;
+    background-color: turquoise;
+    width: 600px;
+    height: 500px;
+    border: 1px solid springgreen
+}
