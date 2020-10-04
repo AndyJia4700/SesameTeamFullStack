@@ -45,37 +45,55 @@ class LogInForm extends React.Component {
     this.props.login(Object.assign({}, this.state));
   }
 
-  handleClick(e){
+  handleClick(e) {
     e.preventDefault();
-    this.setState({
+    this.setState(
+      {
         email: "000@demo.com",
-        password: "123456"
-    }, () => this.props.login(Object.assign({}, this.state)))
+        password: "123456",
+      },
+      () => this.props.login(Object.assign({}, this.state))
+    );
+  }
+
+  renderErrors() {
+    return <ul>{Object.values(this.props.errors)}</ul>;
   }
 
   render() {
     // debugger;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="sign-log-form" onSubmit={this.handleSubmit}>
+        <img src={window.sesameteamURL} className="sesameteam-logo" />
         <input
-          type="text"
-          placeholder="email"
+          type="email"
+          placeholder="Email"
           value={this.state.email}
           onChange={this.update("email")}
-          className=""
+          className="sign-log-input"
         />
 
         <input
-          type="text"
-          placeholder="password"
+          type="password"
+          placeholder="Password"
           value={this.state.password}
           onChange={this.update("password")}
-          className=""
+          className="sign-log-input"
         />
 
-        <input type="submit" value={this.props.formType} className="" />
-        <button onClick={this.handleClick}>Demo</button>
-        <div>New Here? {this.props.navLink}</div>
+        <input
+          type="submit"
+          value={this.props.formType}
+          className="sign-log-button"
+        />
+
+        <div className="sign-log-switch">
+          New Here? <span className="sign-log-span">{this.props.navLink}</span>
+        </div>
+
+        <button onClick={this.handleClick} className="sign-log-button demo">
+          Demo User
+        </button>
       </form>
     );
   }

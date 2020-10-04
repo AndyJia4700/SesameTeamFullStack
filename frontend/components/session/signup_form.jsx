@@ -5,7 +5,7 @@ import { createNewUser } from '../../actions/session_action';
 
 const mSTP = ({errors}) => ({
     errors: errors,
-    formType: 'Create account',
+    formType: 'Create Account',
     navLink: <Link to="/login" className="">Log in</Link>
 });
 
@@ -38,32 +38,44 @@ class SignUpForm extends React.Component {
         this.props.createNewUser(Object.assign({}, this.state))
     }
 
+    renderErrors(){
+        return (
+            <ul>
+                {
+                    Object.values(this.props.errors)
+                }
+            </ul>
+        )
+    }
+
     render(){
         return (
-          <form onSubmit={this.handleSubmit}>
-            
+          <form className="sign-log-form" onSubmit={this.handleSubmit}>
+            <img src={window.sesameteamURL} className="sesameteam-logo" />
             <input
-              type="text"
-              placeholder="email"
+              type="email"
+              placeholder="Email"
               value={this.state.email}
               onChange={this.update("email")}
-              className=""
+              className="sign-log-input"
             />
-            
+
             <input
-              type="text"
-              placeholder="password"
+              type="password"
+              placeholder="Password"
               value={this.state.password}
               onChange={this.update("password")}
-              className=""
+              className="sign-log-input"
             />
-            
-            <input 
-                type="submit"
-                value={this.props.formType}
-                className=""
+
+            <input
+              type="submit"
+              value={this.props.formType}
+              className="sign-log-button"
             />
-            <div>Have an account? {this.props.navLink}</div>
+            <div className="sign-log-switch">
+              Have an account? <span className="sign-log-span">{this.props.navLink}</span>
+            </div>
           </form>
         );
     }

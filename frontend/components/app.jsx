@@ -11,17 +11,19 @@ class App extends React.Component{
 
     render(){
         const nav = (
-          <nav>
-            <div>
-              <a href="">Project</a>
+          <nav className="nav-top">
+            <div className="nav-top-element">
+              <a href="">Explore</a>
             </div>
 
-            <div>
-              <a href="#/">SesameTeam</a>
+            <div className="sesame-word-logo-div">
+              <a href="#/">
+                <img src={window.sesameteamwordURL} />
+              </a>
             </div>
 
-            <div>
-              <SessionShow/>
+            <div className="nav-top-element">
+              <SessionShow />
             </div>
           </nav>
         );
