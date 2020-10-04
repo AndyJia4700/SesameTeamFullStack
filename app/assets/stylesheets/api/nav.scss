@@ -1,0 +1,20 @@
+.nav-top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+    padding: 30px;
+    padding-right: 5%;
+    padding-left: 5%;
+    border-bottom: 1px solid #dadada;
+}
+
+.nav-top-element{
+    font-size: 25px;
+    position: relative;
+    top: 5px;
+}
+
+.sesame-word-logo-div{
+    width: 15%;
+}

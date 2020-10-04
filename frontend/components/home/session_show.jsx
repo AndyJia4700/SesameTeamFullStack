@@ -12,19 +12,13 @@ const mDTP = dispatch => ({
 })
 const SessionShow = ({currentUser, openModal}) => {
     const sessionLinks = () => (
-        <nav>
-            <Link to="/login" className="">login</Link>
-        </nav>
+            <Link to="/login" className="">Log in</Link>
     );
 
     const greeting = () => (
-        <nav>
-            <div>
-                <a onClick={() => openModal('profileDropDown')}>
-                    {currentUser.id}
-                </a>
-            </div>
-        </nav>
+        <a onClick={() => openModal('profileDropDown')}>
+            Hello, {currentUser.id}
+        </a>
     );
 
     return currentUser ? greeting() : sessionLinks();
