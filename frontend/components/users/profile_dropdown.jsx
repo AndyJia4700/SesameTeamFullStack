@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { logout } from '../../actions/session_action';
 
 const mSTP = state => {
@@ -28,6 +29,9 @@ class ProfileDropDown extends React.Component{
         const {currentUser} = this.props
         return(
             <div className="modal-child-div">
+                
+                <Link to={`/users/${currentUser.id}`}>Profile</Link>
+                <br/>
                 <button onClick={this.handleClick}>logout</button>
             </div>
         )

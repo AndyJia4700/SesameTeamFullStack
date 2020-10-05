@@ -1,11 +1,13 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-import SignUpForm from '../components/session/signup_form'
-import LogInForm from '../components/session/login_form'
 import { AuthRoute } from '../util/route_utils';
-import SplashPage from "./home/splash";
-import SessionShow from './home/session_show';
+import { Route } from 'react-router-dom';
+import LogInForm from '../components/session/login_form'
 import Modal from './modal/modal';
+import SessionShow from './home/session_show';
+import SignUpForm from '../components/session/signup_form'
+import SplashPage from "./home/splash";
+import ProfileShow from "./users/profile_show";
+import ProfileEdit from "./users/profile_edit";
 
 class App extends React.Component{
 
@@ -41,6 +43,9 @@ class App extends React.Component{
 
             <div>
               <Route exact path="/" component={SplashPage}/>
+              <Route exact path="/users/:userId" component={ProfileShow}/>
+              <Route exact path="/users/:userId/edit" component={ProfileEdit}/>
+              
               <AuthRoute path="/signup" component={SignUpForm} />
               <AuthRoute path="/login" component={LogInForm} />
             </div>

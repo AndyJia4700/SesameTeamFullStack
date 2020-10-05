@@ -38,15 +38,6 @@ class SignUpForm extends React.Component {
         this.props.createNewUser(Object.assign({}, this.state))
     }
 
-    renderErrors(){
-        return (
-            <ul>
-                {
-                    Object.values(this.props.errors)
-                }
-            </ul>
-        )
-    }
 
     render(){
         return (
@@ -66,6 +57,7 @@ class SignUpForm extends React.Component {
               value={this.state.password}
               onChange={this.update("password")}
               className="sign-log-input"
+              minLength={6}
             />
 
             <input
@@ -74,7 +66,8 @@ class SignUpForm extends React.Component {
               className="sign-log-button"
             />
             <div className="sign-log-switch">
-              Have an account? <span className="sign-log-span">{this.props.navLink}</span>
+              Have an account?{" "}
+              <span className="sign-log-span">{this.props.navLink}</span>
             </div>
           </form>
         );

@@ -1,7 +1,6 @@
 # == Schema Information
 #
 # Table name: users
-#
 #  id              :bigint           not null, primary key
 #  email           :string           not null
 #  session_token   :string           not null
@@ -33,6 +32,8 @@ class User < ApplicationRecord
     has_many :join_project,
     foreign_key: :user_id,
     class_name: "Project"
+
+    has_one_attached :photo
 
     def password=(password)
         @password = password
