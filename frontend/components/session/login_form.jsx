@@ -30,6 +30,7 @@ class LogInForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.update = this.update.bind(this);
+    this.renderErrors = this.renderErrors.bind(this);
   }
 
   update(field) {
@@ -41,7 +42,6 @@ class LogInForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // debugger;
     this.props.login(Object.assign({}, this.state));
   }
 
@@ -54,14 +54,18 @@ class LogInForm extends React.Component {
       },
       () => this.props.login(Object.assign({}, this.state))
     );
+
   }
 
   renderErrors() {
-    return <ul>{Object.values(this.props.errors)}</ul>;
+    return (
+      <ul>
+        {Object.values(this.props.errors)}
+      </ul>
+    )
   }
 
   render() {
-    // debugger;
     return (
       <form className="sign-log-form" onSubmit={this.handleSubmit}>
         <img src={window.sesameteamURL} className="sesameteam-logo" />
@@ -79,7 +83,12 @@ class LogInForm extends React.Component {
           value={this.state.password}
           onChange={this.update("password")}
           className="sign-log-input"
+          minLength={6}
         />
+
+        <div className="sign-log-errors-box">
+          {this.renderErrors()}
+        </div>
 
         <input
           type="submit"

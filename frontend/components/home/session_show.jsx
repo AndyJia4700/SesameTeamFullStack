@@ -14,10 +14,12 @@ const SessionShow = ({currentUser, openModal}) => {
     const sessionLinks = () => (
             <Link to="/login" className="">Log in</Link>
     );
-
+    
+    const name = (currentUser && currentUser.first_name) ? currentUser.first_name : "User"
+    
     const greeting = () => (
         <a onClick={() => openModal('profileDropDown')}>
-            Hello, {currentUser.id}
+            Hello, {name}
         </a>
     );
 
