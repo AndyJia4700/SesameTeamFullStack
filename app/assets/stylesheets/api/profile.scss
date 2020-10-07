@@ -3,7 +3,7 @@
     padding-right: 10%;
 }
 
-.profile-edit{
+.profile-edit-icon{
     font-size: 35px;
     color: #1989f1;
     text-align: right;
@@ -36,3 +36,8 @@
     text-align: center;
 }
 
+.profile-ul{
+    display: flex;
+    flex-direction: column;
+    
+}
