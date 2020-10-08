@@ -1,14 +1,16 @@
-.profile-age{
-    // text-align: right;
-    padding-right: 10%;
+.about{
+    height: 120px;
+}
+
+.age{
+    border: 3px solid blue;
 }
 
 .profile-edit-icon{
     font-size: 35px;
-    // color: #1989f1;
-    // text-align: right;
-    // padding-right: 10%;
-    // margin-bottom: 0;
+    width: 20%;
+    text-align: center;
+    color: #0745f9;
 }
 
 .profile-element{
@@ -17,26 +19,59 @@
     border: 3px solid black;
     border-radius: 20px;
     padding: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
 }
 
+.profile-element-block{
+    width: 100%;
+    display: inline-table;
+    color: white;
+    background: #ff613b;
+    padding: 5%;
+    border-radius: 10px;
+}
+
+.profile-element-block:focus{
+    background: rgb(193, 59, 250);
+}
+
+
 .profile-element-lable{
-    font-size: 25px;
+    display: inline-block;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    color: #8c8484;
+    font-size: 20px;
+    font-weight: bold;
+}
+.profile-element-lable-ul{
+    margin-top: 30px;
+}
+
+.profile-element-li{
+    color: #8c8484;
+    font-size: 20px;
     font-weight: bold;
     padding-right: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-element-ul{
+    padding: 18%;
 }
 
 .profile-photo-div{
-    display: flex;
-    flex-direction: column;
+    display: inline-table;
     text-align: center;
-    // border-bottom: 1px solid #dadada;
+    width: 30%;
 }
+
 .profile-photo-img{
-    // position: relative;
+    width: 300px;
+    height: 300px;
     bottom: 15px;
     border-radius: 120px;
-    height: 240px;
-    width: 240px;
     z-index: -1;
 }
 
@@ -44,6 +79,8 @@
     display: flex;
     flex-direction: row;
     padding: 5%;
+    background: #f3f3f3;
+
 }
 
 .profile-tag-li{
@@ -52,21 +89,54 @@
     color: white;
     border-radius: 10px;
     margin-right: 5px;
-    font-size: 25px;
+    margin-bottom: 5px;
+    font-size: 20px;
     padding: 10px;
+}
+
+.profile-tag-li-check{
+    padding-left: 10px;
+}
+.profile-tag-li-check:hover{
+    color: #3ae63a;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 .profile-tag-li-close{
     padding-left: 10px;
 }
 .profile-tag-li-close:hover{
-    color: #ff93d8;
+    color: #f74e42;
+    font-size: 20px;
     cursor: pointer;
+}
+
+.profile-tag-li-input{
+    display: inline-block;
+    background-color: #ff9a03;
+    color: white;
+    border-radius: 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.profile-tag-li-input:hover{
+    background: rgb(193, 59, 250);
+}
+
+.profile-tag-li-input::placeholder{
+    color: rgb(249, 215, 215);
+    font-weight: 100;
+    font-size: 15px;
 }
 
 .profile-ul{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    font-size: 20px;
+    width: 50%;
+    padding-left: 5%;
 }

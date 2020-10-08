@@ -23,6 +23,7 @@ class ProfileDropDown extends React.Component{
     handleClick(e){
         e.preventDefault();
         this.props.logout().then(this.props.closeModal());
+        window.location.replace("/")
     }
 
     render(){
