@@ -50,8 +50,8 @@ class ProfileShow extends React.Component{
                 return years;
         }
 
-        const education = user.education ? "nothing" : user.education;
-        const about = user.about ? "nothing" : user.about;
+        const education = user.education == null ? "nothing" : user.education;
+        const about = user.about == null ? "nothing" : user.about;
         
         const skill = (
             <ul>

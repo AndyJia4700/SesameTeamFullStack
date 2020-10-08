@@ -1062,6 +1062,12 @@ var ProfileEdit = /*#__PURE__*/function (_React$Component) {
     _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.update = _this.update.bind(_assertThisInitialized(_this));
+    _this.updateSkill = _this.updateSkill.bind(_assertThisInitialized(_this));
+    _this.deleteSkill = _this.deleteSkill.bind(_assertThisInitialized(_this));
+    _this.updatePersonality = _this.updatePersonality.bind(_assertThisInitialized(_this));
+    _this.deletePersonality = _this.deletePersonality.bind(_assertThisInitialized(_this));
+    _this.updateInterest = _this.updateInterest.bind(_assertThisInitialized(_this));
+    _this.deleteInterest = _this.deleteInterest.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1112,7 +1118,8 @@ var ProfileEdit = /*#__PURE__*/function (_React$Component) {
       formData.append('user[personality]', this.state.personality);
       formData.append('user[interest]', this.state.interest);
       formData.append('user[skill]', this.state.skill);
-      formData.append("user[resume_url]", this.state.resume_url);
+      formData.append("user[resume_url]", this.state.resume_url); // debugger;
+
       var userId = this.state.id;
 
       if (this.state.photoFile) {
@@ -1131,8 +1138,74 @@ var ProfileEdit = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
-    key: "updateArray",
-    value: function updateArray() {}
+    key: "updateSkill",
+    value: function updateSkill() {
+      var tag = document.getElementById("skill-input").value;
+
+      if (!Object.values(this.state.skill).includes(tag)) {
+        var updatedSkills = Object.values(this.state.skill).concat(tag);
+        document.getElementById("skill-input").value = "";
+        return this.setState({
+          skill: updatedSkills
+        });
+      }
+    }
+  }, {
+    key: "deleteSkill",
+    value: function deleteSkill(value) {
+      var deletedSkills = Object.values(this.state.skill).filter(function (word) {
+        return word != value;
+      });
+      return this.setState({
+        skill: deletedSkills
+      });
+    }
+  }, {
+    key: "updatePersonality",
+    value: function updatePersonality() {
+      var tag = document.getElementById("personality-input").value;
+
+      if (!Object.values(this.state.personality).includes(tag)) {
+        var updatedPersonalitys = Object.values(this.state.personality).concat(tag);
+        document.getElementById("personality-input").value = "";
+        return this.setState({
+          personality: updatedPersonalitys
+        });
+      }
+    }
+  }, {
+    key: "deletePersonality",
+    value: function deletePersonality(value) {
+      var deletedPersonalitys = Object.values(this.state.personality).filter(function (word) {
+        return word != value;
+      });
+      return this.setState({
+        personality: deletedPersonalitys
+      });
+    }
+  }, {
+    key: "updateInterest",
+    value: function updateInterest() {
+      var tag = document.getElementById("interest-input").value;
+
+      if (!Object.values(this.state.interest).includes(tag)) {
+        var updatedInterests = Object.values(this.state.interest).concat(tag);
+        document.getElementById("interest-input").value = "";
+        return this.setState({
+          interest: updatedInterests
+        });
+      }
+    }
+  }, {
+    key: "deleteInterest",
+    value: function deleteInterest(value) {
+      var deletedInterests = Object.values(this.state.interest).filter(function (word) {
+        return word != value;
+      });
+      return this.setState({
+        interest: deletedInterests
+      });
+    }
   }, {
     key: "render",
     value: function render() {
@@ -1142,40 +1215,111 @@ var ProfileEdit = /*#__PURE__*/function (_React$Component) {
       var preview = this.state.photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: this.state.photoUrl,
         className: "profile-photo-img"
-      }) : null; // debugger;
-
+      }) : null;
+      var birthdate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "profile-element-lable"
+      }, "Birthdate"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "date",
+        value: this.state.birthdate,
+        onChange: this.update("birthdate"),
+        className: "profile-tag-li"
+      }));
+      var skill = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "profile-tag-ul"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "profile-element-lable"
+      }, "Skill"), Object.values(this.state.skill).map(function (skill) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: skill,
+          className: "profile-tag-li"
+        }, skill, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "profile-tag-li-close",
+          onClick: function onClick() {
+            return _this4.deleteSkill(skill);
+          }
+        }, "\xD7"));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        id: "skill-input",
+        className: "profile-tag-li"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        onClick: this.updateSkill
+      }, "Add-skill"));
+      var personality = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "profile-element-lable"
+      }, "Personality"), Object.values(this.state.personality).map(function (personality) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: personality,
+          className: "profile-tag-li"
+        }, personality, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "profile-tag-li-close",
+          onClick: function onClick() {
+            return _this4.deletePersonality(personality);
+          }
+        }, "\xD7"));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        id: "personality-input",
+        className: "profile-element"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        onClick: this.updatePersonality
+      }, "Add-Personality"));
+      var interest = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "profile-element-lable"
+      }, "Interest"), Object.values(this.state.interest).map(function (interest) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: interest,
+          className: "profile-tag-li"
+        }, interest, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "profile-tag-li-close",
+          onClick: function onClick() {
+            return _this4.deleteInterest(interest);
+          }
+        }, "\xD7"));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        id: "interest-input",
+        className: "profile-tag-li",
+        placeholder: "Add your interest"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        onClick: this.updateInterest
+      }, "Add-Interest"));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, preview, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: ""
+        className: "profile-element-lable"
       }, "Update Photo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
         onChange: this.handleFile
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: ""
+        className: "profile-element-lable"
       }, "First Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.first_name,
         onChange: this.update("first_name"),
         className: "profile-element"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: ""
+        className: "profile-element-lable"
       }, "Last Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.last_name,
         onChange: this.update("last_name"),
         className: "profile-element"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), birthdate, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "profile-element-lable"
+      }, "Education"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.education,
+        onChange: this.update("education"),
+        className: "profile-element"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: ""
-      }, "Skill"), Object.values(this.state.skill).map(function (skill) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: skill
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "text",
-          value: skill,
-          onChange: _this4.updateArray
-        }));
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "profile-element-lable"
+      }, "About"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        type: "text",
+        value: this.state.about,
+        onChange: this.update("about"),
+        className: "profile-element"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), skill, personality, interest, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit"
       }, "Update"));
     }
@@ -1287,8 +1431,8 @@ var ProfileShow = /*#__PURE__*/function (_React$Component) {
         return years;
       };
 
-      var education = user.education ? "nothing" : user.education;
-      var about = user.about ? "nothing" : user.about;
+      var education = user.education == null ? "nothing" : user.education;
+      var about = user.about == null ? "nothing" : user.about;
       var skill = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, Object.values(user.skill).map(function (skill) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: skill

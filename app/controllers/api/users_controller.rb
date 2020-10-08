@@ -27,7 +27,11 @@ class Api::UsersController < ApplicationController
     def update
         @user = User.find(params[:user][:id])
         if @user && @user.id == current_user.id
+            # user_params["skill"].split(",")
             if @user.update(user_params)
+                @user.update(skill: user_params["skill"].split(",") )
+                @user.update(interest: user_params["interest"].split(",") )
+                @user.update(personality: user_params["personality"].split(",") )
                 render :show
             else
                 render json: @user.errors.full_messages, status: 422
@@ -38,7 +42,7 @@ class Api::UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:email, :password, :first_name, :last_name, :birthdate, :location, :about, :education, :resume_url, :personality, :interest, :skill, :photo)
+        params.require(:user).permit(:email, :password, :first_name, :last_name, :birthdate, :location, :about, :education, :resume_url, :personality, :interest, :photo, :skill)
     end
 
 end

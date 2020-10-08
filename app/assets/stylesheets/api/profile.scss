@@ -1,10 +1,10 @@
 .profile-age{
     // text-align: right;
-    // padding-right: 10%;
+    padding-right: 10%;
 }
 
 .profile-edit-icon{
-    // font-size: 35px;
+    font-size: 35px;
     // color: #1989f1;
     // text-align: right;
     // padding-right: 10%;
@@ -17,6 +17,12 @@
     border: 3px solid black;
     border-radius: 20px;
     padding: 5px;
+}
+
+.profile-element-lable{
+    font-size: 25px;
+    font-weight: bold;
+    padding-right: 20px;
 }
 
 .profile-photo-div{
@@ -38,6 +44,24 @@
     display: flex;
     flex-direction: row;
     padding: 5%;
+}
+
+.profile-tag-li{
+    display: inline-block;
+    background-color: #00bcd4;
+    color: white;
+    border-radius: 10px;
+    margin-right: 5px;
+    font-size: 25px;
+    padding: 10px;
+}
+
+.profile-tag-li-close{
+    padding-left: 10px;
+}
+.profile-tag-li-close:hover{
+    color: #ff93d8;
+    cursor: pointer;
 }
 
 .profile-ul{
