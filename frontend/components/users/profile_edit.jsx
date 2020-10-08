@@ -74,10 +74,13 @@ class ProfileEdit extends React.Component{
     }
 
     update(field){
-        // debugger;
         return e => this.setState({
             [field]: e.currentTarget.value
         })
+    }
+
+    updateArray(){
+        
     }
     
     render(){
@@ -85,6 +88,8 @@ class ProfileEdit extends React.Component{
         if (!this.state.last_name) this.state.last_name="";
         const preview = this.state.photoUrl ? <img src={this.state.photoUrl} className="profile-photo-img"/> : null;
         // debugger;
+
+
         return (
           <form onSubmit={this.handleSubmit}>
             {preview}
@@ -108,6 +113,20 @@ class ProfileEdit extends React.Component{
               className="profile-element"
             />
             <br />
+
+            <label htmlFor="">Skill</label>
+            {
+                Object.values(this.state.skill).map(skill => (
+                <li key={skill}>
+                    <input
+                    type="text"
+                    value={skill}
+                    onChange={this.updateArray}
+                    />
+                </li>
+                ))
+            }
+
             <button type="submit">Update</button>
           </form>
         );

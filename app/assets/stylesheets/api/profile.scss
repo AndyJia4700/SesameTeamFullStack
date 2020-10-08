@@ -1,14 +1,14 @@
 .profile-age{
-    text-align: right;
-    padding-right: 10%;
+    // text-align: right;
+    // padding-right: 10%;
 }
 
 .profile-edit-icon{
-    font-size: 35px;
-    color: #1989f1;
-    text-align: right;
-    padding-right: 10%;
-    margin-bottom: 0;
+    // font-size: 35px;
+    // color: #1989f1;
+    // text-align: right;
+    // padding-right: 10%;
+    // margin-bottom: 0;
 }
 
 .profile-element{
@@ -20,24 +20,29 @@
 }
 
 .profile-photo-div{
-    border-bottom: 1px solid #dadada;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    // border-bottom: 1px solid #dadada;
 }
 .profile-photo-img{
-    position: relative;
+    // position: relative;
     bottom: 15px;
     border-radius: 120px;
     height: 240px;
     width: 240px;
+    z-index: -1;
 }
 
 .profile-show-main-div{
     display: flex;
-    flex-direction: column;
-    text-align: center;
+    flex-direction: row;
+    padding: 5%;
 }
 
 .profile-ul{
     display: flex;
     flex-direction: column;
-    
+    justify-content: space-between;
+    font-size: 20px;
 }
