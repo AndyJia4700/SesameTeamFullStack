@@ -50,14 +50,14 @@ class ProfileShow extends React.Component{
                 return years;
         }
 
-        const education = user.education == null ? "nothing" : user.education;
-        const about = user.about == null ? "nothing" : user.about;
+        const education = user.education == null ? "" : user.education;
+        const about = user.about == null ? "" : user.about;
         
         const skill = (
             <ul>
                 {
                     Object.values(user.skill).map( skill =>
-                        <li key={skill}>{skill}</li>
+                        <li className="profile-tag-li" key={skill}>{skill}</li>
                     )
                 }
             </ul>
@@ -66,7 +66,7 @@ class ProfileShow extends React.Component{
             <ul>
                 {
                     Object.values(user.personality).map( personality =>
-                        <li key={personality}>{personality}</li>
+                        <li className="profile-tag-li" key={personality}>{personality}</li>
                     )
                 }
             </ul>
@@ -75,7 +75,7 @@ class ProfileShow extends React.Component{
             <ul>
                 {
                     Object.values(user.interest).map( interest =>
-                        <li key={interest}>{interest}</li>
+                        <li className="profile-tag-li" key={interest}>{interest}</li>
                     )
                 }
             </ul>
@@ -85,36 +85,38 @@ class ProfileShow extends React.Component{
           <div className="profile-show-main-div">
             <div className="profile-photo-div">
               <img src={user.photoUrl} className="profile-photo-img" />
-              <h3>
-                <input
-                  value={user.first_name + "  " + user.last_name}
-                  className="profile-element"
-                  readOnly={true}
-                />
-              </h3>
 
-              <div className="profile-age">
-                {age(user.birthdate) + " years old"}
-              </div>
+              <ul className="profile-element-ul">
+                <li className="profile-element">
+                  {user.first_name + "  " + user.last_name}
+                </li>
+                <li className="profile-element age">
+                  {age(user.birthdate)}
+                </li>
+                <li className="profile-element">{user.location}</li>
+              </ul>
             </div>
 
-            {/* {user.location} */}
-
             <ul className="profile-ul">
-              <li>
-                Education: <span>{education}</span>
+              <li className="profile-element-li">
+                <label className="profile-element-lable">Education:</label>
+                <div className="profile-element-block">{education}</div>
               </li>
-              <li>
-                Skill[]: <span>{skill}</span>
+              <li className="profile-element-li">
+                <label className="profile-element-lable">About:</label>
+                <div className="profile-element-block about">{about}</div>
               </li>
-              <li>
-                Personality[]: <span>{personality}</span>
+              <li className="profile-element-li">
+                <label className="profile-element-lable">Skill:</label>
+                <span>{skill}</span>
               </li>
-              <li>
-                Interest[]: <span>{interest}</span>
+              <li className="profile-element-li">
+                <label className="profile-element-lable">Personality:</label>
+                <span>{personality}</span>
               </li>
-              <li>
-                About: <span>{about}</span>
+              <li className="profile-element-li">
+                <label className="profile-element-lable">Interest:</label>
+                <span>{interest}</span>
               </li>
             </ul>
 

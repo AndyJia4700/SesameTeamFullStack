@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUsers, fetchUser, updateUser } from "../../actions/user_action";
+import { FiSave} from "react-icons/fi";
+import { FaCheck } from "react-icons/fa";
 
 const mSTP = (state, ownProps) => {
     const userId = state.session.currentUser.id;
@@ -72,13 +74,12 @@ class ProfileEdit extends React.Component{
         formData.append('user[skill]', this.state.skill);
         formData.append("user[resume_url]", this.state.resume_url);
 
-        // debugger;
-
         const userId = this.state.id;
         if (this.state.photoFile){
             formData.append('user[photo]', this.state.photoFile);
         }
         this.props.action(formData, userId);
+        window.location.replace(`#/users/${userId}`);
     }
 
     update(field){
@@ -89,6 +90,7 @@ class ProfileEdit extends React.Component{
 
     updateSkill(){
         const tag = document.getElementById("skill-input").value;
+        if ( tag.split(' ').join('') == "") return null;
         if (!Object.values(this.state.skill).includes(tag)){
             const updatedSkills = Object.values(this.state.skill).concat(tag);
             document.getElementById("skill-input").value = "";
@@ -107,7 +109,8 @@ class ProfileEdit extends React.Component{
 
     updatePersonality(){
         const tag = document.getElementById("personality-input").value;
-            if (!Object.values(this.state.personality).includes(tag)){
+        if (tag.split(" ").join("") == "") return null;
+        if (!Object.values(this.state.personality).includes(tag)){
             const updatedPersonalitys = Object.values(this.state.personality).concat(tag);
             document.getElementById("personality-input").value = "";
             return this.setState({
@@ -125,6 +128,7 @@ class ProfileEdit extends React.Component{
 
     updateInterest(){
         const tag = document.getElementById("interest-input").value;
+        if (tag.split(" ").join("") == "") return null;
         if (!Object.values(this.state.interest).includes(tag)){
             const updatedInterests = Object.values(this.state.interest).concat(tag);
             document.getElementById("interest-input").value = "";
@@ -144,22 +148,14 @@ class ProfileEdit extends React.Component{
     render(){
         
         if (!this.state.last_name) this.state.last_name="";
-        const preview = this.state.photoUrl ? <img src={this.state.photoUrl} className="profile-photo-img"/> : null;
-        const birthdate = (
-          <div>
-            <label className="profile-element-lable">Birthdate</label>
-            <input
-              type="date"
-              value={this.state.birthdate}
-              onChange={this.update("birthdate")}
-              className="profile-tag-li"
-            />
-          </div>
+        const preview = this.state.photoUrl ? (
+          <img src={this.state.photoUrl} className="profile-photo-img" />
+        ) : (
+          <img className="profile-photo-img"/>
         );
 
         const skill = (
-          <ul className="profile-tag-ul">
-            <label className="profile-element-lable">Skill</label>
+          <ul>
             {Object.values(this.state.skill).map((skill) => (
               <li key={skill} className="profile-tag-li">
                 {skill}
@@ -172,14 +168,22 @@ class ProfileEdit extends React.Component{
               </li>
             ))}
 
-            <input type="text" id="skill-input" className="profile-tag-li" />
-            <span onClick={this.updateSkill}>Add-skill</span>
+            <div className="profile-tag-li-input">
+              <input
+                type="text"
+                id="skill-input"
+                placeholder="Add your skill"
+              />
+
+              <span className="profile-tag-li-check" onClick={this.updateSkill}>
+                <FaCheck />
+              </span>
+            </div>
           </ul>
         );
 
         const personality = (
-          <div>
-            <label className="profile-element-lable">Personality</label>
+          <ul>
             {Object.values(this.state.personality).map((personality) => (
               <li key={personality} className="profile-tag-li">
                 {personality}
@@ -192,17 +196,23 @@ class ProfileEdit extends React.Component{
               </li>
             ))}
 
-            <input
-              type="text"
-              id="personality-input"
-              className="profile-element"
-            />
-            <span onClick={this.updatePersonality}>Add-Personality</span>
-          </div>
+            <div className="profile-tag-li-input">
+              <input
+                type="text"
+                id="personality-input"
+                placeholder="Describe your personality"
+              />
+              <span
+                className="profile-tag-li-check"
+                onClick={this.updatePersonality}
+              >
+                <FaCheck />
+              </span>
+            </div>
+          </ul>
         );
         const interest = (
-          <div>
-            <label className="profile-element-lable">Interest</label>
+          <ul>
             {Object.values(this.state.interest).map((interest) => (
               <li key={interest} className="profile-tag-li">
                 {interest}
@@ -215,63 +225,118 @@ class ProfileEdit extends React.Component{
               </li>
             ))}
 
-            <input
-              type="text"
-              id="interest-input"
-              className="profile-tag-li"
-              placeholder="Add your interest"
-            />
-            <span onClick={this.updateInterest}>Add-Interest</span>
-          </div>
+            <div className="profile-tag-li-input">
+              <input
+                type="text"
+                id="interest-input"
+                placeholder="Add your interest"
+              />
+              <span
+                className="profile-tag-li-check"
+                onClick={this.updateInterest}
+              >
+                <FaCheck />
+              </span>
+            </div>
+          </ul>
         );
 
         return (
-          <form onSubmit={this.handleSubmit} >
-            {preview}
-            <br />
-            <label className="profile-element-lable">Update Photo</label>
-            <input type="file" onChange={this.handleFile} />
-            <br />
-            <label className="profile-element-lable">First Name</label>
-            <input
-              type="text"
-              value={this.state.first_name}
-              onChange={this.update("first_name")}
-              className="profile-element"
-            />
-            <br />
-            <label className="profile-element-lable">Last Name</label>
-            <input
-              type="text"
-              value={this.state.last_name}
-              onChange={this.update("last_name")}
-              className="profile-element"
-            />
-            <br />
-            {birthdate}
-            <br/>
-            <label className="profile-element-lable">Education</label>
-            <input
-              type="text"
-              value={this.state.education}
-              onChange={this.update("education")}
-              className="profile-element"
-            />
-            <br />
-            <label className="profile-element-lable">About</label>
-            <textarea
-              type="text"
-              value={this.state.about}
-              onChange={this.update("about")}
-              className="profile-element"
-            />
-            <br />
+          <form onSubmit={this.handleSubmit}>
+            <div className="profile-show-main-div">
+              <div className="profile-photo-div">
+                {preview}
+                <input
+                    type="file"
+                    onChange={this.handleFile}
+                    className=""
+                />
+                
+                <ul className="profile-element-lable-ul">
+                  <li>
+                    <label className="profile-element-lable">
+                      First Name:{" "}
+                    </label>
+                    <input
+                      type="text"
+                      value={this.state.first_name}
+                      onChange={this.update("first_name")}
+                      className="profile-element"
+                    />
+                  </li>
+                  <li>
+                    <label className="profile-element-lable">Last Name: </label>
+                    <input
+                      type="text"
+                      value={this.state.last_name}
+                      onChange={this.update("last_name")}
+                      className="profile-element"
+                    />
+                  </li>
 
-            {skill}
-            {personality}
-            {interest}
+                  <li>
+                    <label className="profile-element-lable">Birthdate:</label>
+                    <input
+                        type="date"
+                        value={this.state.birthdate}
+                        onChange={this.update("birthdate")}
+                        className="profile-element"
+                    />
+                  </li>
 
-            <button type="submit">Update</button>
+                  <li>
+                    <label className="profile-element-lable">Location: </label>
+                    <input
+                        type="text"
+                        value={this.state.location}
+                        onChange={this.update("location")}
+                        className="profile-element"
+                    />
+                  </li>
+                </ul>
+              </div>
+
+              <ul className="profile-ul">
+                <li className="profile-element-li">
+                  <label className="profile-element-lable">Education:</label>
+                  <input
+                    type="text"
+                    value={this.state.education}
+                    onChange={this.update("education")}
+                    className="profile-element-block"
+                  />
+                </li>
+
+                <li className="profile-element-li">
+                  <label className="profile-element-lable">About:</label>
+                  <textarea
+                    type="text"
+                    value={this.state.about}
+                    maxLength={250}
+                    onChange={this.update("about")}
+                    className="profile-element-block about"
+                  />
+                </li>
+                <li className="profile-element-li">
+                  <label className="profile-element-lable">Skill:</label>
+                  {skill}
+                </li>
+                <li className="profile-element-li">
+                  <label className="profile-element-lable">Personality:</label>
+                  {personality}
+                </li>
+                <li className="profile-element-li">
+                  <label className="profile-element-lable">Interest:</label>
+                  {interest}
+                </li>
+              </ul>
+
+              <h3 className="profile-edit-icon">
+                <button type="submit">
+                  <FiSave />
+                </button>
+              </h3>
+            </div>
           </form>
         );
     }
