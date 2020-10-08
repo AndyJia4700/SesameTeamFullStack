@@ -1132,6 +1132,8 @@ var ProfileEdit = /*#__PURE__*/function (_React$Component) {
 
       this.props.action(formData, userId);
       window.location.replace("#/users/".concat(userId));
+      window.location.reload();
+      return false;
     }
   }, {
     key: "update",

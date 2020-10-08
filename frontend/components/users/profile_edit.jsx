@@ -80,6 +80,8 @@ class ProfileEdit extends React.Component{
         }
         this.props.action(formData, userId);
         window.location.replace(`#/users/${userId}`);
+        window.location.reload();
+        return false
     }
 
     update(field){

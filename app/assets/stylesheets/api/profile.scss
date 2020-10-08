@@ -25,12 +25,17 @@
 
 .profile-element-block{
     width: 100%;
-    display: block;
+    display: inline-table;
     color: white;
     background: #ff613b;
     padding: 5%;
     border-radius: 10px;
 }
+
+.profile-element-block:focus{
+    background: rgb(193, 59, 250);
+}
+
 
 .profile-element-lable{
     display: inline-block;
@@ -57,7 +62,7 @@
 }
 
 .profile-photo-div{
-    flex-direction: column;
+    display: inline-table;
     text-align: center;
     width: 30%;
 }
@@ -116,6 +121,10 @@
     margin-bottom: 5px;
     font-size: 20px;
     padding: 10px;
+}
+
+.profile-tag-li-input:hover{
+    background: rgb(193, 59, 250);
 }
 
 .profile-tag-li-input::placeholder{
