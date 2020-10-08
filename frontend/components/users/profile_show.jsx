@@ -50,17 +50,41 @@ class ProfileShow extends React.Component{
                 return years;
         }
 
+        const education = user.education ? "nothing" : user.education;
+        const about = user.about ? "nothing" : user.about;
+        
+        const skill = (
+            <ul>
+                {
+                    Object.values(user.skill).map( skill =>
+                        <li key={skill}>{skill}</li>
+                    )
+                }
+            </ul>
+        )
+        const personality = (
+            <ul>
+                {
+                    Object.values(user.personality).map( personality =>
+                        <li key={personality}>{personality}</li>
+                    )
+                }
+            </ul>
+        )
+        const interest = (
+            <ul>
+                {
+                    Object.values(user.interest).map( interest =>
+                        <li key={interest}>{interest}</li>
+                    )
+                }
+            </ul>
+        )
+
         return (
           <div className="profile-show-main-div">
-            <h3 className="profile-edit-icon">
-              <Link to={`/users/${user.id}/edit`}>
-                <FiEdit />
-              </Link>
-            </h3>
-
             <div className="profile-photo-div">
               <img src={user.photoUrl} className="profile-photo-img" />
-
               <h3>
                 <input
                   value={user.first_name + "  " + user.last_name}
@@ -78,21 +102,27 @@ class ProfileShow extends React.Component{
 
             <ul className="profile-ul">
               <li>
-                Education: <span>{user.education}</span>
+                Education: <span>{education}</span>
               </li>
               <li>
-                Skill[]: <span>{user.skill}</span>
+                Skill[]: <span>{skill}</span>
               </li>
               <li>
-                Personality[]: <span>{user.personality}</span>
+                Personality[]: <span>{personality}</span>
               </li>
               <li>
-                Interest[]: <span>{user.interest}</span>
+                Interest[]: <span>{interest}</span>
               </li>
               <li>
-                About: <span>{user.about}</span>
+                About: <span>{about}</span>
               </li>
             </ul>
+
+            <h3 className="profile-edit-icon">
+              <Link to={`/users/${user.id}/edit`}>
+                <FiEdit />
+              </Link>
+            </h3>
           </div>
         );
     }
