@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthRoute } from '../util/route_utils';
+import { AuthRoute, ProtRoute } from '../util/route_utils';
 import { Route } from 'react-router-dom';
 import LogInForm from '../components/session/login_form'
 import Modal from './modal/modal';
@@ -8,6 +8,9 @@ import SignUpForm from '../components/session/signup_form'
 import SplashPage from "./home/splash";
 import ProfileShow from "./users/profile_show";
 import ProfileEdit from "./users/profile_edit";
+import ProjectCreateContainer from "./projects/create_project_container";
+import ProjectEditContainer from './projects/edit_project_container';
+import ProjectShow from './projects/project_show';
 
 class App extends React.Component{
 
@@ -38,19 +41,37 @@ class App extends React.Component{
 
         return (
           <div>
-            <Modal/>
+            <Modal />
             {nav}
 
             <div>
-              <Route exact path="/" component={SplashPage}/>
-              <Route exact path="/users/:userId" component={ProfileShow}/>
-              <Route exact path="/users/:userId/edit" component={ProfileEdit}/>
-              
+              <Route exact path="/" component={SplashPage} />
+
+              <ProtRoute path="/users/:userId" component={ProfileShow} />
+              <ProtRoute path="/users/:userId/edit" component={ProfileEdit} />
+
+              <ProtRoute
+                path="/project/new"
+                component={ProjectCreateContainer}
+              />
+
+              <Route
+                exact
+                path="/projects/:projectId"
+                component={ProjectShow}
+              />
+
+              <Route
+                exact
+                path="/projects/:projectId/edit"
+                component={ProjectEditContainer}
+              />
+
               <AuthRoute path="/signup" component={SignUpForm} />
               <AuthRoute path="/login" component={LogInForm} />
             </div>
 
-            {footer}
+            {/* {footer} */}
           </div>
         );
     }

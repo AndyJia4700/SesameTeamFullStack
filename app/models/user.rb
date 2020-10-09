@@ -25,13 +25,10 @@ class User < ApplicationRecord
     after_initialize :ensure_session_token
     attr_reader :password
 
-    has_many :lead_project,
+    has_many :projects,
     foreign_key: :leader_id,
     class_name: "Project"
 
-    has_many :join_project,
-    foreign_key: :user_id,
-    class_name: "Project"
 
     has_one_attached :photo
 

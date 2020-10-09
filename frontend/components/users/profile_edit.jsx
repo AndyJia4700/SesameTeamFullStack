@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchUsers, fetchUser, updateUser } from "../../actions/user_action";
+import { fetchUsers, fetchUser, updateUser } from "../../actions/user_actions";
 import { FiSave} from "react-icons/fi";
 import { FaCheck } from "react-icons/fa";
 
@@ -8,7 +8,7 @@ const mSTP = (state, ownProps) => {
     const userId = state.session.currentUser.id;
     const user = state.entities.users[userId];
     return {
-        user
+      user
     };
 }
 

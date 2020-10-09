@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { closeModal } from '../../actions/modal_action';
-import { logout } from '../../actions/session_action';
+import { closeModal } from '../../actions/modal_actions';
+import { logout } from '../../actions/session_actions';
 import ProfileDropDown from '../users/profile_dropdown';
 
 const mSTP = state => {
