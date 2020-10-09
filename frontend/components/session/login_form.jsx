@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { login } from "../../actions/session_action";
+import { login } from "../../actions/session_actions";
 
 const mSTP = ({ errors }) => ({
   errors: errors,

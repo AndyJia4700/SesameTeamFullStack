@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchUsers } from '../../actions/user_action';
+import { fetchUsers } from '../../actions/user_actions';
 import { FiEdit } from "react-icons/fi";
 
 
@@ -90,9 +90,7 @@ class ProfileShow extends React.Component{
                 <li className="profile-element">
                   {user.first_name + "  " + user.last_name}
                 </li>
-                <li className="profile-element age">
-                  {age(user.birthdate)}
-                </li>
+                <li className="profile-element age">{age(user.birthdate)}</li>
                 <li className="profile-element">{user.location}</li>
               </ul>
             </div>

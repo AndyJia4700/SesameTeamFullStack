@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logout } from '../../actions/session_action';
+import { logout } from '../../actions/session_actions';
+import { FaPlus } from "react-icons/fa";
+
 
 const mSTP = state => {
     return {
@@ -28,14 +30,17 @@ class ProfileDropDown extends React.Component{
 
     render(){
         const {currentUser} = this.props
-        return(
-            <div className="modal-child-div">
-                
-                <Link to={`/users/${currentUser.id}`}>Profile</Link>
-                <br/>
-                <button onClick={this.handleClick}>logout</button>
-            </div>
-        )
+        return (
+          <div className="modal-child-div">
+            <Link to={`/users/${currentUser.id}`}>Profile</Link>
+            <br />
+            <Link to="/project/new">
+              <FaPlus />
+            </Link>
+            <br />
+            <button onClick={this.handleClick}>logout</button>
+          </div>
+        );
     }
 
 }
