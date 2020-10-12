@@ -1,4 +1,3 @@
-import { takeRight } from 'lodash';
 import React from 'react';
 import { FaCheck } from "react-icons/fa";
 
@@ -52,6 +51,11 @@ class ProjectForm extends React.Component {
     }
     // debugger;
     this.props.action(formData);
+    if (!this.state.id) return null;
+    const projectId = this.state.id;
+    window.location.replace(`#/projects/${projectId}`);
+    window.location.reload();
+    return false;
   }
 
   update(field) {
@@ -60,15 +64,31 @@ class ProjectForm extends React.Component {
 
   updateRole(){
     // debugger
-    const role = document.getElementById("role").value;
-    if (role.split(' ').join('') == "") return null;
-    if (!Object.values(this.state.role).includes(role)){
-      const updateRoles = Object.values(this.state.role).concat(role);
-      document.getElementById("role").value = "";
-      return this.setState({
-        role: updateRoles
-      })
-    }
+    let roleTitle = document.getElementById("role-title").value;
+    let roleDescription = document.getElementById("role-description").value;
+    
+    if (roleTitle.split(" ").join("") == "") {
+      window.alert("please enter a role title");
+      return null;
+    };
+
+    if (roleTitle.includes(",")) {
+      window.alert("no comma allowed in role title");
+      return null;
+    };
+
+    if (!roleDescription) return "";
+
+    const updateRoles = Object.values(this.state.role);
+    updateRoles.push([roleTitle, roleDescription]);
+    // debugger;
+    // document.getElementById("role-title").value = "";
+    // document.getElementById("role-description").value = "";
+
+    return this.setState({
+      role: updateRoles
+    })
+
   }
 
   deleteRole(value){
@@ -89,22 +109,37 @@ class ProjectForm extends React.Component {
       <img className="profile-photo-img" />
     );
 
+    // const preview = this.state.pictureUrl ? (
+    //   <video className="video-view" controls>
+    //     <source src={this.state.pictureUrl} type="video/mp4" />
+    //   </video>
+    // ) : (
+    //   <img className="profile-photo-img" />
+    // );
+    let i = 0;
     const role = (
       <ul>
         {Object.values(this.state.role).map((role) => (
-          <li key={role} className="profile-tag-li">
-            {role}
+          <li key={i++} className="">
+            <h3>{role[0]}</h3>
+            <p>{role[1]}</p>
             <span
               className="profile-tag-li-close"
               onClick={() => this.deleteRole(role)}
             >
               &times;
             </span>
+            <br/>
           </li>
         ))}
 
-        <div className="profile-tag-li-input">
-          <input type="text" id="role" placeholder="Add your role" />
+        <div className="">
+          <input type="text" id="role-title" placeholder="Role Titlte" />
+          <textarea
+            type="text"
+            id="role-description"
+            placeholder="Role Description"
+          />
           <span className="profile-tag-li-check" onClick={this.updateRole}>
             <FaCheck />
           </span>

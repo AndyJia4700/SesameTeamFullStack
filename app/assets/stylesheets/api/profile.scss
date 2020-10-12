@@ -7,11 +7,16 @@
 }
 
 .profile-edit-icon{
-    font-size: 35px;
+    font-size: 50px;
     width: 20%;
     text-align: center;
     color: #0745f9;
 }
+
+.profile-edit-icon-Fi:hover{
+    color: darkgreen;
+}
+
 
 .profile-element{
     width: 200px;
@@ -23,8 +28,12 @@
     font-weight: bold;
 }
 
+.profile-element:focus{
+    background: rgb(193, 59, 250);
+}
+
 .profile-element-block{
-    width: 100%;
+    width: 80%;
     display: inline-table;
     color: white;
     background: #ff613b;
@@ -64,7 +73,7 @@
 .profile-photo-div{
     display: inline-table;
     text-align: center;
-    width: 30%;
+    width: 25%;
 }
 
 .profile-photo-img{
@@ -74,6 +83,10 @@
     border-radius: 120px;
     z-index: -1;
 }
+
+// .profile-photo-upload{
+    
+// }
 
 .profile-show-main-div{
     display: flex;

@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { updateProject, fetchProject } from "../../actions/project_actions";
 import ProjectForm from './project_form';
-import { GrEdit } from "react-icons/Gr";
+import { FiSave } from "react-icons/fi";
+import { Link } from 'react-router-dom';
 
 const mSTP = (state, ownProps) => {
     const projectId = ownProps.match.params.projectId;
@@ -10,7 +11,7 @@ const mSTP = (state, ownProps) => {
     return {
       project,
       currentUser: state.session.currentUser,
-      formType: <GrEdit />,
+      formType: <FiSave/>,
     };
 };
 
@@ -23,7 +24,7 @@ const mDTP = dispatch => {
 
 class EditProjectForm extends React.Component{
     constructor(props){
-        super(props)
+        super(props);
     }
 
     componentDidMount(){
@@ -33,6 +34,7 @@ class EditProjectForm extends React.Component{
 
     render(){
         const {action, project, currentUser, formType} = this.props;
+
         if (!project) return null;
         return (
           <div>
