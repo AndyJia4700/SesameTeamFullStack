@@ -27,7 +27,6 @@ class Api::UsersController < ApplicationController
     def update
         @user = User.find(params[:user][:id])
         if @user && @user.id == current_user.id
-            # user_params["skill"].split(",")
             if @user.update(user_params)
                 @user.update(skill: user_params["skill"].split(",") )
                 @user.update(interest: user_params["interest"].split(",") )

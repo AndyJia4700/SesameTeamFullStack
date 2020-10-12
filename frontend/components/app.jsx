@@ -11,6 +11,7 @@ import ProfileEdit from "./users/profile_edit";
 import ProjectCreateContainer from "./projects/create_project_container";
 import ProjectEditContainer from './projects/edit_project_container';
 import ProjectShow from './projects/project_show';
+import ProjectIndex from "./projects/project_index";
 
 class App extends React.Component{
 
@@ -18,7 +19,7 @@ class App extends React.Component{
         const nav = (
           <nav className="nav-top">
             <div className="nav-top-element">
-              <a href="">Explore</a>
+              <a href="#/projects">Explore</a>
             </div>
 
             <div className="sesame-word-logo-div">
@@ -47,19 +48,14 @@ class App extends React.Component{
             <div>
               <Route exact path="/" component={SplashPage} />
 
-              <ProtRoute path="/users/:userId" component={ProfileShow} />
-              <ProtRoute path="/users/:userId/edit" component={ProfileEdit} />
+              <ProtRoute exact path="/users/:userId" component={ProfileShow} />
+              
+              <ProtRoute exact path="/users/:userId/edit" component={ProfileEdit} />
 
-              <ProtRoute
-                path="/project/new"
-                component={ProjectCreateContainer}
-              />
+              <ProtRoute exact path="/project/new" component={ProjectCreateContainer} />
 
-              <Route
-                exact
-                path="/projects/:projectId"
-                component={ProjectShow}
-              />
+              <Route exact path="/projects/:projectId" component={ProjectShow} />
+              <Route exact path="/projects" component={ProjectIndex} />
 
               <Route
                 exact

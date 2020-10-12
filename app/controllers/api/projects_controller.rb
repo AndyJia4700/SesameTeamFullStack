@@ -38,7 +38,12 @@ class Api::ProjectsController < ApplicationController
         @project = Project.find(params[:project][:id])
         if @project && @project.leader_id == current_user.id
             if @project.update(project_params)
-                @project.update(role: project_params["role"].split(","))
+                debugger
+                
+                project_params["role"].split("%%%").map do |ele|
+
+                end
+                @project.update(role: project_params["role"].split("%%%"))
                 render :show
             else
                 render json: @project.errors.full_messages, status: 422
@@ -55,8 +60,17 @@ class Api::ProjectsController < ApplicationController
     end
 
     private
+    
 
     def project_params
-        params.require(:project).permit(:project_title, :project_description, :leader_id, :role, :picture)
+        debugger
+        params.require(:project).permit(
+            :project_title, 
+            :project_description, 
+            :leader_id, 
+            :picture, 
+            
+            :role
+        )
     end
 end

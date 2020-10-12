@@ -120,7 +120,7 @@ class ProfileShow extends React.Component{
 
             <h3 className="profile-edit-icon">
               <Link to={`/users/${user.id}/edit`}>
-                <FiEdit />
+                <FiEdit className="profile-edit-icon-Fi" />
               </Link>
             </h3>
           </div>
