@@ -8,8 +8,8 @@ const mSTP = (state, ownProps) => {
   const projectId = ownProps.match.params.projectId;
   const project = state.entities.projects[projectId]
   return {
-      project,
-      currentUser: state.session.currentUser,
+    project,
+    currentUser: state.session.currentUser,
   }
 }
 
@@ -41,9 +41,9 @@ class ProjectShow extends React.Component{
     const {project} = this.props
 
     const role = Object.values(project.role).map(role =>
-        <li key={role}>
-            {role}
-        </li>
+      <li key={role}>
+          {role}
+      </li>
     );
 
     const projectId = this.props.match.params.projectId;

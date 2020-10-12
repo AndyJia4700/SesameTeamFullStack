@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { updateProject, fetchProject } from "../../actions/project_actions";
 import ProjectForm from './project_form';
 import { FiSave } from "react-icons/fi";
-import { Link } from 'react-router-dom';
 
 const mSTP = (state, ownProps) => {
     const projectId = ownProps.match.params.projectId;
