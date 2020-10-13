@@ -51,11 +51,11 @@ class ProjectForm extends React.Component {
     }
     // debugger;
     this.props.action(formData);
-    if (!this.state.id) return null;
-    const projectId = this.state.id;
-    window.location.replace(`#/projects/${projectId}`);
-    window.location.reload();
-    return false;
+    // if (!this.state.id) return null;
+    // const projectId = this.state.id;
+    // window.location.replace(`#/projects/${projectId}`);
+    // window.location.reload();
+    // return false;
   }
 
   update(field) {
@@ -76,26 +76,46 @@ class ProjectForm extends React.Component {
       window.alert("no comma allowed in role title");
       return null;
     };
-
+    if (roleTitle.includes("^")) {
+      window.alert("sorry, no ^ allowed in role title");
+      return null;
+    };
     if (!roleDescription) return "";
+    if (roleDescription.includes("%")) {
+      window.alert("sorry, no % allowed in role description");
+      return null;
+    };
 
     const updateRoles = Object.values(this.state.role);
     updateRoles.push([roleTitle, roleDescription]);
-    // debugger;
-    // document.getElementById("role-title").value = "";
-    // document.getElementById("role-description").value = "";
+
+    updateRoles.map(
+      (ele) => (
+        ele[0].includes("^^") ? (ele[0] = ele[0]) : (ele[0] = ele[0] + "^^"),
+        ele[1].includes("%%") ? (ele[1] = ele[1]) : (ele[1] = ele[1] + "%%")
+      )
+    );
+
+    document.getElementById("role-title").value = "";
+    document.getElementById("role-description").value = "";
 
     return this.setState({
       role: updateRoles
     })
-
   }
 
   deleteRole(value){
-    // debugger
     const deletedRoles = Object.values(this.state.role).filter(
       (word) => word != value
     );
+
+    deletedRoles.map(
+      (ele) => (
+        ele[0].includes("^^") ? (ele[0] = ele[0]) : (ele[0] = ele[0] + "^^"),
+        ele[1].includes("%%") ? (ele[1] = ele[1]) : (ele[1] = ele[1] + "%%")
+      )
+    );
+
     return this.setState({
       role: deletedRoles,
     });
@@ -121,15 +141,15 @@ class ProjectForm extends React.Component {
       <ul>
         {Object.values(this.state.role).map((role) => (
           <li key={i++} className="">
-            <h3>{role[0]}</h3>
-            <p>{role[1]}</p>
+            <h3>{!role[0].includes("^^") ? role[0] : role[0].slice(0, -2)}</h3>
+            <p>{!role[1].includes("%%") ? role[1] : role[1].slice(0, -2)}</p>
             <span
               className="profile-tag-li-close"
               onClick={() => this.deleteRole(role)}
             >
               &times;
             </span>
-            <br/>
+            <br />
           </li>
         ))}
 

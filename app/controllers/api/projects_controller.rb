@@ -36,18 +36,40 @@ class Api::ProjectsController < ApplicationController
     def update
         
         @project = Project.find(params[:project][:id])
+        # debugger
+        
         if @project && @project.leader_id == current_user.id
-            if @project.update(project_params)
-                debugger
-                
-                project_params["role"].split("%%%").map do |ele|
+            
+            if @project.role.flatten == params.require(:project).permit(:role)["role"].split(',')
+                if @project.update(
+                        project_title: project_params[:project_title],
+                        project_description: project_params[:project_description],
+                        picture: project_params[:picture],
+                    )
 
+                    render :show
+                else
+                    render json: @project.errors.full_messages, status: 422
                 end
-                @project.update(role: project_params["role"].split("%%%"))
-                render :show
             else
-                render json: @project.errors.full_messages, status: 422
+                updatedrole = project_params[:role].split('%%').map do |ele|
+                    ele.split('^^').each do |word|
+                        word[0] == ',' ? word[0] = '' : word
+                    end
+                end
+                if @project.update(
+                        project_title: project_params[:project_title],
+                        project_description: project_params[:project_description],
+                        picture: project_params[:picture],
+                        role: updatedrole             
+                    )
+                    render :show
+                else
+                    render json: @project.errors.full_messages, status: 422
+                end
             end
+        else
+            render json: @project.errors.full_messages, status: 422
         end
     end
 
@@ -63,14 +85,13 @@ class Api::ProjectsController < ApplicationController
     
 
     def project_params
-        debugger
+        # debugger
         params.require(:project).permit(
             :project_title, 
             :project_description, 
-            :leader_id, 
-            :picture, 
-            
-            :role
+            :role,
+            :leader_id,
+            :picture
         )
     end
 end

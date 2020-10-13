@@ -28,15 +28,14 @@ class ProjectIndex extends React.Component{
     render(){
         const {projects} = this.props;
 
-        const projectList = projects.map(project => 
-            <li key={project.id}>
-                <Link to={`/projects/${project.id}`}>
-                    <img src={project.pictureUrl}/>
-                    <p>{project.project_title}</p>
-
-                </Link>
-            </li>
-        );
+        const projectList = projects.map((project) => (
+          <li key={project.id} className="project-index-li">
+            <Link to={`/projects/${project.id}`}>
+              <img src={project.pictureUrl} className="project-index-li-img" />
+              <p>{project.project_title}</p>
+            </Link>
+          </li>
+        ));
 
         return (
           <div>
