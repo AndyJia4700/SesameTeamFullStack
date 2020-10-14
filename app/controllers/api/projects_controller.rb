@@ -23,12 +23,10 @@ class Api::ProjectsController < ApplicationController
     def create
         @project = Project.new(project_params)
         @project.leader_id = current_user.id
-        # debugger
+        
         if @project.save
-            # debugger
             render :show
         else
-            # debugger
             render json: @project.errors.full_messages, status: 422
         end
     end
@@ -36,18 +34,23 @@ class Api::ProjectsController < ApplicationController
     def update
         
         @project = Project.find(params[:project][:id])
+        
         if @project && @project.leader_id == current_user.id
-            if @project.update(project_params)
-                debugger
-                
-                project_params["role"].split("%%%").map do |ele|
-
+                updatedrole = project_params[:role].split('üü').map do |ele|
+                    ele.split('ÿÿ').each do |word|
+                        word[0] == ',' ? word[0] = '' : word
+                    end
                 end
-                @project.update(role: project_params["role"].split("%%%"))
-                render :show
-            else
-                render json: @project.errors.full_messages, status: 422
-            end
+                if @project.update(project_params)
+                    @project.update(role: updatedrole)
+                    render :show
+                else
+                    render json: @project.errors.full_messages, status: 422
+                end
+            # end
+        else
+            
+            render json: @project.errors.full_messages, status: 422
         end
     end
 
@@ -63,14 +66,13 @@ class Api::ProjectsController < ApplicationController
     
 
     def project_params
-        debugger
+        # debugger
         params.require(:project).permit(
             :project_title, 
             :project_description, 
-            :leader_id, 
-            :picture, 
-            
-            :role
+            :role,
+            :leader_id,
+            :picture
         )
     end
 end

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { createProject } from '../../actions/project_actions';
+import { createProject } from "../../actions/project_actions";
 import ProjectForm from './project_form';
 import {GrSave} from 'react-icons/Gr';
 
@@ -16,8 +16,8 @@ const mSTP = (state) => {
   }
 };
 
-const mDTP = dispatch => ({
-  action: project => dispatch(createProject(project))
+const mDTP = (dispatch) => ({
+  action: (project) => dispatch(createProject(project)),
 });
 
 

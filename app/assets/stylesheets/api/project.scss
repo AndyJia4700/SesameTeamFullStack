@@ -1,3 +1,140 @@
+.project-form-main-div{
+    display: flex;
+    flex-direction: column;
+    padding: 0 5% 0 5%;
+}
+
+.project-form-description-input{
+    width: 85%;
+    height: 100px;
+    padding: 5%;
+    background: #963232;
+    border-radius: 25px;
+    font-size: 20px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.project-form-description-input:focus{
+    background: rgb(193, 59, 250);
+}
+
+
+.project-form-div{
+    display: flex;
+}
+
+.profile-form-img{
+    border-radius: 25px;
+    width: 100%;
+    height: 100%;
+}
+
+.profile-form-img-div{
+    display: flex;
+    flex-direction: column;
+    background: cornsilk;
+    border: 1px solid;
+    border-radius: 25px;
+    width: 55%;
+    height: 500px;
+    margin-right: 5%;
+    margin-top: 35px;
+}
+
+.profile-form-img-upload{
+    position: absolute;
+    top: 225px;
+    left: 7%;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.project-form-rest-div{
+    width: 40%;
+}
+
+.profile-form-role-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.profile-form-role-input-div{
+    color: white;
+    font-size: 20px;
+    width: 85%;
+    background-color: #03a9f4;
+    padding: 5%;
+    margin-bottom: 3px;
+    border-radius: 25px;
+}
+
+
+.profile-form-role-li{
+    color: white;
+    font-size: 20px;
+    width: 85%;
+    background-color: #1b9e92;
+    padding: 5%;
+    margin-bottom: 3px;
+    border-radius: 25px;
+}
+
+.profile-form-role-li:hover{
+    background: #FF9800;
+}
+
+.profile-form-role-span1{
+    font-weight: bold;
+}
+
+.profile-form-roletitle-input{
+    font-size: 25px;
+    padding-bottom: 3px;
+    border-bottom: 2px solid #ffc7c7;
+    width: 100%;
+}
+
+.project-form-submit-button{
+    font-size: 30px;
+}
+
+.project-form-title-div{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    text-align: center;
+    
+}
+
+.project-form-title-input{
+    font-weight: bold;
+    font-size: 30px;
+    padding: 30px;
+    width: 120%;
+    border-radius: 25px;
+}
+
+.project-form-title-input:focus{
+    background: rgb(193, 59, 250);
+}
+
+.project-index-li{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.project-index-li-img{
+    height: 200px;
+    width: 300px;
+}
+
+.profile-index-main-div{
+    padding: 5%;
+}
+
 .project-main-div{
     padding-left: 10%;
     padding-right: 10%;
@@ -13,6 +150,21 @@
     font-size: 20px;
     padding-bottom: 5%;
 }
+
+#role-description{
+    width: 100%;
+    padding-top: 10px;
+}
+
+// #role-title:focus{
+//     background: rgb(193, 59, 250);
+//     border-radius: 10px;
+// }
+
+// #role-description:focus{
+//     background: rgb(193, 59, 250);
+//     border-radius: 10px;
+// }
 
 .video-view{
     width: 500px;
