@@ -48,7 +48,7 @@ class App extends React.Component{
             <div>
               <Route exact path="/" component={SplashPage} />
 
-              <ProtRoute exact path="/users/:userId" component={ProfileShow} />
+              <Route exact path="/users/:userId" component={ProfileShow} />
               
               <ProtRoute exact path="/users/:userId/edit" component={ProfileEdit} />
 

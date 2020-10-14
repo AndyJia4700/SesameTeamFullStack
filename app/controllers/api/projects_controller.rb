@@ -21,8 +21,14 @@ class Api::ProjectsController < ApplicationController
     end
 
     def create
+        updatedrole = project_params[:role].split('üü').map do |ele|
+            ele.split('ÿÿ').each do |word|
+                word[0] == ',' ? word[0] = '' : word
+            end
+        end
         @project = Project.new(project_params)
         @project.leader_id = current_user.id
+        @project.role = updatedrole
         
         if @project.save
             render :show
