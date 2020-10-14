@@ -73,10 +73,19 @@ class ProfileEdit extends React.Component {
     if (this.state.photoFile) {
       formData.append("user[photo]", this.state.photoFile);
     }
-    this.props.action(formData, userId);
-    window.location.replace(`#/users/${userId}`);
-    window.location.reload();
-    return false;
+    
+    if (confirm("Save Changes?")) {
+      this.props.action(formData, userId);
+      setTimeout(() => {
+        window.location.replace(`#/users/${userId}`);
+        window.location.reload();
+        return false;
+      }, 500);
+    } else {
+      window.location.reload();
+      return false;
+    }
+
   }
 
   update(field) {
@@ -210,6 +219,7 @@ class ProfileEdit extends React.Component {
         </div>
       </ul>
     );
+
 
     return (
       <form onSubmit={this.handleSubmit}>

@@ -23,12 +23,10 @@ class Api::ProjectsController < ApplicationController
     def create
         @project = Project.new(project_params)
         @project.leader_id = current_user.id
-        # debugger
+        
         if @project.save
-            # debugger
             render :show
         else
-            # debugger
             render json: @project.errors.full_messages, status: 422
         end
     end
@@ -36,39 +34,22 @@ class Api::ProjectsController < ApplicationController
     def update
         
         @project = Project.find(params[:project][:id])
-        # debugger
         
         if @project && @project.leader_id == current_user.id
-            
-            if @project.role.flatten == params.require(:project).permit(:role)["role"].split(',')
-                if @project.update(
-                        project_title: project_params[:project_title],
-                        project_description: project_params[:project_description],
-                        picture: project_params[:picture],
-                    )
-
-                    render :show
-                else
-                    render json: @project.errors.full_messages, status: 422
-                end
-            else
-                updatedrole = project_params[:role].split('%%').map do |ele|
-                    ele.split('^^').each do |word|
+                updatedrole = project_params[:role].split('üü').map do |ele|
+                    ele.split('ÿÿ').each do |word|
                         word[0] == ',' ? word[0] = '' : word
                     end
                 end
-                if @project.update(
-                        project_title: project_params[:project_title],
-                        project_description: project_params[:project_description],
-                        picture: project_params[:picture],
-                        role: updatedrole             
-                    )
+                if @project.update(project_params)
+                    @project.update(role: updatedrole)
                     render :show
                 else
                     render json: @project.errors.full_messages, status: 422
                 end
-            end
+            # end
         else
+            
             render json: @project.errors.full_messages, status: 422
         end
     end

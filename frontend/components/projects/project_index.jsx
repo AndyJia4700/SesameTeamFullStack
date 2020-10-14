@@ -38,7 +38,7 @@ class ProjectIndex extends React.Component{
         ));
 
         return (
-          <div>
+          <div className="profile-index-main-div">
             <ul>{projectList}</ul>
           </div>
         );
