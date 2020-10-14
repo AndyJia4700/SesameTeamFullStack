@@ -51,7 +51,9 @@ class ProjectForm extends React.Component {
         ele[1].includes("üü") ? (ele[1] = ele[1]) : (ele[1] = ele[1] + "üü")
       )
     );
+
     formData.append("project[role]", this.state.role);
+
 
     if (this.state.pictureFile) {
       formData.append("project[picture]", this.state.pictureFile);
@@ -59,11 +61,18 @@ class ProjectForm extends React.Component {
 
     if (confirm("Save Changes?")) {
       this.props.action(formData);
-      if (!this.state.id) return null;
-      const projectId = this.state.id;
-      window.location.replace(`#/projects/${projectId}`);
-      window.location.reload();
-      return false;
+      if (!this.state.id) {
+        window.location.replace(`#/users/${this.props.currentUser.id}`);
+        window.location.reload();
+        return false;
+
+      } else {
+        const projectId = this.state.id;
+        window.location.replace(`#/projects/${projectId}`);
+        window.location.reload();
+        return false;
+      }
+
     } else {
       window.location.reload();
       return false;

@@ -29,6 +29,7 @@ class LogInForm extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleClick2 = this.handleClick2.bind(this);
     this.update = this.update.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
   }
@@ -54,7 +55,16 @@ class LogInForm extends React.Component {
       },
       () => this.props.login(Object.assign({}, this.state))
     );
-
+  }
+  handleClick2(e) {
+    e.preventDefault();
+    this.setState(
+      {
+        email: "001@test.com",
+        password: "123456",
+      },
+      () => this.props.login(Object.assign({}, this.state))
+    );
   }
 
   renderErrors() {
@@ -101,8 +111,12 @@ class LogInForm extends React.Component {
         </div>
 
         <button onClick={this.handleClick} className="sign-log-button demo">
-          Demo User
+          Demo User 1
         </button>
+        <button onClick={this.handleClick2} className="sign-log-button demo">
+          Demo User 2
+        </button>
+
       </form>
     );
   }

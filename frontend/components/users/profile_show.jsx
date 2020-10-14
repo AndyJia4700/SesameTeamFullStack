@@ -3,21 +3,24 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchUsers } from '../../actions/user_actions';
 import { FiEdit } from "react-icons/fi";
+import { fetchProjects } from '../../actions/project_actions';
 
 
 const mSTP = (state, ownProps) => {
-  const userId = state.session.currentUser.id;
+  const userId = ownProps.match.params.userId;
   const user = state.entities.users[userId];
+  const projects = Object.values(state.entities.projects);
   return {
     currentUser: state.session.currentUser,
-    user
+    user,
+    projects,
   }
 }
 
 const mDTP = dispatch => {
   return {
-    fetchUsers: () => dispatch(fetchUsers()),
     fetchUser: (userId) => dispatch(fetchUsers(userId)),
+    fetchProjects: () => dispatch(fetchProjects())
   };
 }
 
@@ -27,13 +30,17 @@ class ProfileShow extends React.Component{
   }
 
   componentDidMount(){
-    // debugger;
-    this.props.fetchUsers();
+    
+    const userId = this.props.match.params.userId;
+    this.props.fetchUser(userId);
+    this.props.fetchProjects();
   }
     
   render(){
-    const { user } = this.props;
+    
+    if (!this.props.user) return null;
 
+    const { user, projects } = this.props;
     const age = (date) => {
       if(date === null) return 0;
       const birthDate = new Date(date);
@@ -82,9 +89,26 @@ class ProfileShow extends React.Component{
       </ul>
     );
 
+    const edit = (user.id == this.props.currentUser.id) ? (
+      <Link to={`/users/${user.id}/edit`}>
+        <FiEdit className="profile-edit-icon-Fi" />
+      </Link>
+    ) : null
+
+    const projectLists = projects.map((project) => (
+      project.leader_id == user.id ? (
+      <li key={project.id} className="project-index-li">
+        <Link to={`/projects/${project.id}`}>
+          <p>{project.project_title}</p>
+          <img src={project.pictureUrl} className="project-index-li-img" />
+        </Link>
+      </li>) : null
+    ));
+
     return (
       <div className="profile-show-main-div">
         <div className="profile-photo-div">
+          <h3 className="profile-edit-icon">{edit}</h3>
           <img src={user.photoUrl} className="profile-photo-img" />
 
           <ul className="profile-element-ul">
@@ -118,12 +142,10 @@ class ProfileShow extends React.Component{
             <span>{interest}</span>
           </li>
         </ul>
-
-        <h3 className="profile-edit-icon">
-          <Link to={`/users/${user.id}/edit`}>
-            <FiEdit className="profile-edit-icon-Fi" />
-          </Link>
-        </h3>
+        <ul>
+          <label className="profile-element-lable">Lead Project:</label>
+          {projectLists}
+        </ul>
       </div>
     );
   }

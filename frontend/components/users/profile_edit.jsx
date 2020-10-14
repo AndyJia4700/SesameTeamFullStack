@@ -225,6 +225,11 @@ class ProfileEdit extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <div className="profile-show-main-div">
           <div className="profile-photo-div">
+            <h3 className="profile-edit-icon">
+              <button type="submit">
+                <FiSave className="profile-edit-icon-Fi" />
+              </button>
+            </h3>
             {preview}
             <input
               type="file"
@@ -308,12 +313,6 @@ class ProfileEdit extends React.Component {
               {interest}
             </li>
           </ul>
-
-          <h3 className="profile-edit-icon">
-            <button type="submit">
-              <FiSave className="profile-edit-icon-Fi"/>
-            </button>
-          </h3>
         </div>
       </form>
     );
