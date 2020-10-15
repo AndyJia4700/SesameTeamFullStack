@@ -2,6 +2,13 @@ class Api::ProjectsController < ApplicationController
     before_action :ensure_logged_in, only:[:create, :update, :destroy]
     skip_before_action :verify_authenticity_token
 
+    # def check_tag_id
+    #     @tags = Tag.all
+    #     project_params[:tag_id].split(',').map do |tag|
+    #        @tags.find_by("tag_name": tag) ? @tags.find_by("tag_name": tag).id : nil
+    #     end
+    # end
+
     def index
         @projects = Project.all.includes(:leader)
         render :index
@@ -47,7 +54,12 @@ class Api::ProjectsController < ApplicationController
                         word[0] == ',' ? word[0] = '' : word
                     end
                 end
+
+                @tags = Tag.all
+                tag_id = project_params[:tag_id].split(',').map {|tag|@tags.find_by("tag_name": tag) ? @tags.find_by("tag_name": tag).id : tag.to_i}
+                # debugger
                 if @project.update(project_params)
+                    @project.update(tag_id: tag_id)
                     @project.update(role: updatedrole)
                     render :show
                 else
@@ -78,6 +90,7 @@ class Api::ProjectsController < ApplicationController
             :project_description, 
             :role,
             :leader_id,
+            :tag_id,
             :picture
         )
     end

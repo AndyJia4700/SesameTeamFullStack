@@ -9,7 +9,6 @@ const mSTP = (state, ownProps) => {
   const projectId = ownProps.match.params.projectId;
   const project = state.entities.projects[projectId];
   const user = project ? state.entities.users[state.entities.projects[projectId].leader_id] : null
-
   return {
     project,
     currentUser: state.session.currentUser,
@@ -54,7 +53,10 @@ class ProjectShow extends React.Component {
   render() {
     if (!this.props.project) return null;
     if (!this.props.user) return null;
-    const { project, user, currentUser } = this.props;
+    
+    const currentUserId = (this.props.currentUser) ? this.props.currentUser.id : null;
+
+    const { project, user } = this.props;
 
     const role = Object.values(project.role).map((role) => (
       <li key={role}>{role}</li>
@@ -62,7 +64,7 @@ class ProjectShow extends React.Component {
 
     const projectId = this.props.match.params.projectId;
 
-    const edit = currentUser.id == project.leader_id ? (
+    const edit = (currentUserId == project.leader_id) ? (
             <div>
               <button onClick={this.deleteThisProject}>Delete</button>
               <Link to={`/projects/${projectId}/edit`}>
