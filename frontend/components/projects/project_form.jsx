@@ -10,11 +10,58 @@ class ProjectForm extends React.Component {
     this.update = this.update.bind(this);
     this.updateRole = this.updateRole.bind(this);
     this.deleteRole = this.deleteRole.bind(this);
+    this.addTag = this.addTag.bind(this);
+    this.removeTag = this.removeTag.bind(this);
   }
 
   componentDidMount() {
     this.setState({
       leader_id: this.props.currentUser.id,
+    });
+  }
+
+  addTag(e) {
+    e.preventDefault();
+    const addedTag = document.getElementById("tag_input").value;
+
+    if (Number(addedTag)) {
+      alert("please don't use a number as this tag");
+      return null;
+    }
+
+    if (addedTag.split(" ").join("") == "") return null;
+
+    if (addedTag.includes(",")) {
+      alert("no comma allowed here");
+      return null;
+    }
+
+    const tagArr = Object.values(this.state.tag_id).map((id) =>
+      this.props.tags[id] ? this.props.tags[id].tag_name : id
+    );
+
+    if (
+      tagArr.includes(addedTag) ||
+      Object.values(this.state.tag_id).includes(addedTag)
+    ) {
+      return null;
+    } else {
+      this.props.createTag({ tag: { tag_name: addedTag } });
+      const updatedTags = Object.values(this.state.tag_id).concat(addedTag);
+      document.getElementById("tag_input").value = "";
+      this.setState({
+        tag_id: updatedTags,
+      });
+    }
+  }
+
+  removeTag(value) {
+    const removeTag = Object.values(this.state.tag_id).filter(
+      // (id) => this.props.tags[id].tag_name != value
+      (id) => id != value
+    );
+    return this.setState({
+      tag_id: removeTag,
     });
   }
 
@@ -40,6 +87,7 @@ class ProjectForm extends React.Component {
     const formData = new FormData();
     formData.append("project[id]", this.state.id);
     formData.append("project[project_title]", this.state.project_title);
+    formData.append("project[tag_id]", this.state.tag_id);
     formData.append(
       "project[project_description]",
       this.state.project_description
@@ -54,7 +102,6 @@ class ProjectForm extends React.Component {
 
     formData.append("project[role]", this.state.role);
 
-
     if (this.state.pictureFile) {
       formData.append("project[picture]", this.state.pictureFile);
     }
@@ -65,14 +112,12 @@ class ProjectForm extends React.Component {
         window.location.replace(`#/users/${this.props.currentUser.id}`);
         window.location.reload();
         return false;
-
       } else {
         const projectId = this.state.id;
         window.location.replace(`#/projects/${projectId}`);
         window.location.reload();
         return false;
       }
-
     } else {
       window.location.reload();
       return false;
@@ -84,7 +129,6 @@ class ProjectForm extends React.Component {
   }
 
   updateRole() {
-    // debugger
     let roleTitle = document.getElementById("role-title").value;
     let roleDescription = document.getElementById("role-description").value;
 
@@ -144,11 +188,10 @@ class ProjectForm extends React.Component {
 
   render() {
     const preview = this.state.pictureUrl ? (
-      <img src={this.state.pictureUrl} className="profile-form-img" />
+      <img src={this.state.pictureUrl} className="project-form-img" />
     ) : (
       <img className="profile-photo-img" />
     );
-
     // const preview = this.state.pictureUrl ? (
     //   <video className="video-view" controls>
     //     <source src={this.state.pictureUrl} type="video/mp4" />
@@ -156,13 +199,14 @@ class ProjectForm extends React.Component {
     // ) : (
     //   <img className="profile-photo-img" />
     // );
+
     let i = 0;
     const role = (
       <ul>
         {Object.values(this.state.role).map((role) => (
-          <li key={i++} className="profile-form-role-li">
-            <div className="profile-form-role-div">
-              <span className="profile-form-role-span1">
+          <li key={i++} className="project-form-role-li">
+            <div className="project-form-role-div">
+              <span className="project-form-role-span1">
                 {!role[0].includes("ÿÿ") ? role[0] : role[0].slice(0, -2)}
               </span>
               <span
@@ -176,13 +220,13 @@ class ProjectForm extends React.Component {
           </li>
         ))}
 
-        <div className="profile-form-role-input-div">
-          <div className="profile-form-role-div">
+        <div className="project-form-role-input-div">
+          <div className="project-form-role-div">
             <input
               type="text"
               id="role-title"
               placeholder="Role Titlte"
-              className="profile-form-roletitle-input"
+              className="project-form-roletitle-input"
             />
             <span className="profile-tag-li-check" onClick={this.updateRole}>
               <FaCheck />
@@ -195,6 +239,31 @@ class ProjectForm extends React.Component {
           />
         </div>
       </ul>
+    );
+
+    const tag_id = (
+      <ul>
+        {Object.values(this.state.tag_id).map((id) => (
+          <li key={id}>
+            {this.props.tags[id] ? this.props.tags[id].tag_name : id}
+            <span
+              className="profile-tag-li-close"
+              onClick={() => this.removeTag(id)}
+            >
+              &times;
+            </span>
+          </li>
+        ))}
+      </ul>
+    );
+
+    const tagInput = (
+      <div className="project-form-tag-input">
+        <input type="text" id="tag_input" placeholder="Add a tag here" />
+        <span onClick={this.addTag}>
+          <FaCheck />
+        </span>
+      </div>
     );
 
     return (
@@ -216,15 +285,19 @@ class ProjectForm extends React.Component {
         </div>
 
         <div className="project-form-div">
-          <div className="profile-form-img-div">
-            {preview}
+          <div className="project-form-img-div">
             <label className="profile-element-lable">
               <input
                 type="file"
                 onChange={this.handleFile}
-                className="profile-form-img-upload"
+                className="project-form-img-upload"
               />
             </label>
+
+            <div>{preview}</div>
+
+            {tag_id}
+            {tagInput}
           </div>
 
           <div className="project-form-rest-div">

@@ -89,7 +89,8 @@ class ProfileShow extends React.Component{
       </ul>
     );
 
-    const edit = (user.id == this.props.currentUser.id) ? (
+    const currentUserId = (this.props.currentUser) ? this.props.currentUser.id : null;
+    const edit = (user.id == currentUserId) ? (
       <Link to={`/users/${user.id}/edit`}>
         <FiEdit className="profile-edit-icon-Fi" />
       </Link>
