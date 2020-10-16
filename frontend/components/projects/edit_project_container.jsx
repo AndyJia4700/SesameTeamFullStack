@@ -11,9 +11,9 @@ const mSTP = (state, ownProps) => {
     const tags = state.entities.tags
 
     return {
+      currentUser: state.session.currentUser,
       project,
       tags,
-      currentUser: state.session.currentUser,
       formType: <FiSave/>,
     };
 };
