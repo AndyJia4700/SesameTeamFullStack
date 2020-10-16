@@ -4,11 +4,10 @@ import { createProject } from "../../actions/project_actions";
 import { createTag, fetchTags } from "../../actions/tag_actions";
 import ProjectForm from './project_form';
 import {GrSave} from 'react-icons/gr';
-import { FaCheck } from "react-icons/fa";
-
 
 
 const mSTP = (state) => {
+  const tags = state.entities.tags;
   return{
     project: {
       project_title: "",
@@ -16,6 +15,7 @@ const mSTP = (state) => {
       role: [],
       tag_id: [],
     },
+    tags,
     tag: {
       tag_name: "",
     },
@@ -30,6 +30,42 @@ const mDTP = (dispatch) => ({
   createTag: (tag) => dispatch(createTag(tag)),
 });
 
+class CreateProjectForm extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    this.props.fetchTags();
+  }
+
+  render(){
+    if (!this.props.currentUser) return null;
+    
+    const {
+      action,
+      project,
+      currentUser,
+      formType,
+      tags,
+      createTag,
+    } = this.props;
+
+    return (
+      <div>
+        <ProjectForm
+          action={action}
+          project={project}
+          currentUser={currentUser}
+          formType={formType}
+          tags={tags}
+          createTag={createTag}
+        />
+      </div>
+    );
+  }
+}
 
 
-export default connect(mSTP, mDTP)(ProjectForm)
+
+export default connect(mSTP, mDTP)(CreateProjectForm);

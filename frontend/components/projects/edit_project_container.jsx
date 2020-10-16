@@ -33,15 +33,16 @@ class EditProjectForm extends React.Component{
     }
 
     componentDidMount(){
-        const projectId = this.props.match.params.projectId;
-        this.props.fetchProject(projectId);
-        this.props.fetchTags();
+      const projectId = this.props.match.params.projectId;
+      this.props.fetchProject(projectId);
+      this.props.fetchTags();
     }
 
     render(){
+      if(!this.props.project) return null;
+      if (this.props.currentUser.id !== this.props.project.leader_id)return null;
         const {action, project, currentUser, formType, tags, createTag} = this.props;
 
-        if (!project) return null;
         return (
           <div>
             <ProjectForm

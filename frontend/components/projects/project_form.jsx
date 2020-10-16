@@ -1,12 +1,11 @@
 import React from "react";
 import { FaCheck } from "react-icons/fa";
-import SearchTag from '../search/searchtag';
-
 
 class ProjectForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = this.props.project;
+    this.state.search = "";
     this.handleFile = this.handleFile.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
@@ -24,7 +23,6 @@ class ProjectForm extends React.Component {
 
   addTag(e) {
     e.preventDefault();
-    // debugger;
     const addedTag = document.getElementById("tag_input").value;
     const propWord = ["a", "about", "an", "and", "are", "but", "for", "in", "into", "is", "of", "on", "or", "out", "the", "to", "with", "without"]
     const inputTag = addedTag
@@ -69,7 +67,6 @@ class ProjectForm extends React.Component {
 
   removeTag(value) {
     const removeTag = Object.values(this.state.tag_id).filter(
-      // (id) => this.props.tags[id].tag_name != value
       (id) => id != value
     );
     return this.setState({
@@ -200,9 +197,6 @@ class ProjectForm extends React.Component {
   }
 
   render() {
-    if (this.props.currentUser.id !== this.props.project.leader_id) return null;
-    // debugger
-
     const preview = this.state.pictureUrl ? (
       <img src={this.state.pictureUrl} className="project-form-img" />
     ) : (
@@ -263,7 +257,7 @@ class ProjectForm extends React.Component {
           type="text"
           id="tag_input"
           placeholder="Add a tag here"
-
+          onChange={this.update("search")}
         />
         <span onClick={this.addTag} className="profile-tag-li-check">
           <FaCheck />
@@ -271,18 +265,12 @@ class ProjectForm extends React.Component {
       </div>
     );
 
-    // let tagKey = document.getElementById("tag_input") ? document.getElementById("tag_input").value.toLowerCase() : null;
-    // const tagHint = (
-    //   Object.values(this.props.tags).map(tag => {
-    //     ((tag.tag_name) && tag.tag_name.toLowerCase().includes(tagKey)) ? 
-    //     (
-    //       <li key={tag.id}>
-    //         {tag.tag_name}
-    //       </li>
-    //     ) : null
-    //   })
-    // )
-    // <SearchTag/>
+    let tagSearchKey = this.state.search.toLowerCase();
+    const tagHint = Object.values(this.props.tags).map((tag) => {
+      if (tag.tag_name && tag.tag_name.toLowerCase().includes(tagSearchKey)) {
+        return <li key={tag.id} onClick={() => document.getElementById("tag_input").value = tag.tag_name}>{tag.tag_name}</li>;
+      }
+    });
 
     const tag_id = (
       <ul>
@@ -297,13 +285,10 @@ class ProjectForm extends React.Component {
             </span>
           </li>
         ))}
-        <li className="profile-tag-li-input">{tagInput}</li>
-
-        <SearchTag 
-          tags={this.props.tags}
-          addTag={this.addTag}
-        />
-
+        <div>
+          <li className="profile-tag-li-input">{tagInput}</li>
+          <ul>{tagHint}</ul>
+        </div>
       </ul>
     );
 
@@ -340,7 +325,6 @@ class ProjectForm extends React.Component {
             <div>{preview}</div>
 
             {tag_id}
-            {/* {tagInput} */}
           </div>
 
           <div className="project-form-rest-div">
