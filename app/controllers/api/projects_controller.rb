@@ -26,9 +26,13 @@ class Api::ProjectsController < ApplicationController
                 word[0] == ',' ? word[0] = '' : word
             end
         end
+        @tags = Tag.all
+        tag_id = project_params[:tag_id].split(',').map {|tag|@tags.find_by("tag_name": tag) ? @tags.find_by("tag_name": tag).id : tag.to_i}
+                
         @project = Project.new(project_params)
         @project.leader_id = current_user.id
         @project.role = updatedrole
+        @project.tag_id = tag_id
         
         if @project.save
             render :show
@@ -50,7 +54,7 @@ class Api::ProjectsController < ApplicationController
 
                 @tags = Tag.all
                 tag_id = project_params[:tag_id].split(',').map {|tag|@tags.find_by("tag_name": tag) ? @tags.find_by("tag_name": tag).id : tag.to_i}
-                # debugger
+                
                 if @project.update(project_params)
                     @project.update(tag_id: tag_id)
                     @project.update(role: updatedrole)
