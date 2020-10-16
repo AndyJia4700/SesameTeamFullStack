@@ -2,13 +2,6 @@ class Api::ProjectsController < ApplicationController
     before_action :ensure_logged_in, only:[:create, :update, :destroy]
     skip_before_action :verify_authenticity_token
 
-    # def check_tag_id
-    #     @tags = Tag.all
-    #     project_params[:tag_id].split(',').map do |tag|
-    #        @tags.find_by("tag_name": tag) ? @tags.find_by("tag_name": tag).id : nil
-    #     end
-    # end
-
     def index
         @projects = Project.all.includes(:leader)
         render :index
