@@ -13,6 +13,7 @@ const receiveUser = user => ({
     user
 });
 
+
 export const fetchUsers = () => dispatch => (
     UserUtil.fetchUsers()
     .then(users => dispatch(receiveAllUsers(users)))

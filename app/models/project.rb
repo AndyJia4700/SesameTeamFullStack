@@ -13,7 +13,11 @@
 #  updated_at          :datetime         not null
 #  leader_id           :integer
 #
+# require 'elasticsearch/model'
 class Project < ApplicationRecord
+    # include Elasticsearch::Model
+    # include Elasticsearch::Model::Callbacks
+    searchkick
     validates :project_title, presence: true, uniqueness: true
     
     belongs_to :leader,
@@ -22,5 +26,16 @@ class Project < ApplicationRecord
 
     has_one_attached :picture
 
+    def search_data
+        {
+            project_title: project_title
+        }
+    end
 
+    # scope :search_import, -> { includes(:leader) }
 end
+
+# Project.__elasticsearch__.create_index!
+# Project.import
+
+# @projects = Project.search('*').records
