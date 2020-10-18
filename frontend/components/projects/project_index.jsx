@@ -12,26 +12,33 @@ const mSTP = state => {
 }
 
 const mDTP = dispatch => {
+  // debugger
   return {
-    fetchProjects: () => dispatch(fetchProjects()),
-    fetchTags: () => dispatch(fetchTags())
-  }
+    fetchProjects: (query) => dispatch(fetchProjects(query)),
+    fetchTags: () => dispatch(fetchTags()),
+  };
 }
 
 class ProjectIndex extends React.Component{
   constructor(props){
     super(props);
+    // this.state.search = "";
     this.tagAttached = this.tagAttached.bind(this);
   }
 
   componentDidMount(){
-    this.props.fetchProjects();
+    // debugger
+    const query = this.props.location.search;
+    this.props.fetchProjects(query);
     this.props.fetchTags();
   }
 
   tagAttached(e){
     e.preventDefault();
-    
+    // const tag_id = document.getElementById("")
+    // this.setState({
+    //   search: 
+    // })
     
   }
 

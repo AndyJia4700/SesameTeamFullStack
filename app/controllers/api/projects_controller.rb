@@ -3,27 +3,15 @@ class Api::ProjectsController < ApplicationController
     skip_before_action :verify_authenticity_token
 
     def index
-        @projects = Project.all.includes(:leader)
-        # @projects = Project.search "*"
+        
+        # @projects = Project.all.includes(:leader)
+        query = params[:title].presence || "*"
+        # query = params[{title: :exact}].presence || "*"
+        # debugger
+        @projects = Project.search(query, fields:[{tag_id: :exact}]).results
+
         render :index
     end
-
-    # def search(arr)
-    #     if !arr || arr.length == 0 return nil
-    #     project_list = []
-    #     @projects.each do |project|
-    #         if project.tag_id.length > 0
-    #             arr.each do |id|
-    #                 if project.tag_id.includes(id)
-    #                     project_list << project
-    #                 end
-    #             end
-    #         else
-    #             return nil
-    #         end
-    #         return project_list
-    #     end
-    # end
 
     def show
         @project = Project.find(params[:id])

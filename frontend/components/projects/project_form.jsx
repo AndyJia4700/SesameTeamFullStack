@@ -117,20 +117,24 @@ class ProjectForm extends React.Component {
     }
 
     if (confirm("Save Changes?")) {
+      // console.log("====================================");
+      //***** ATTENTION ******
+      // need some time pause function here to prevent erros!!!
+      // console.log("====================================");
       this.props.action(formData);
-      if (!this.state.id) {
-        window.location.replace(`#/users/${this.props.currentUser.id}`);
-        window.location.reload();
-        return false;
-      } else {
-        const projectId = this.state.id;
-        window.location.replace(`#/projects/${projectId}`);
-        window.location.reload();
-        return false;
-      }
-    } else {
-      window.location.reload();
-      return false;
+      //   if (!this.state.id) {
+      //     window.location.replace(`#/users/${this.props.currentUser.id}`);
+      //     window.location.reload();
+      //     return false;
+      //   } else {
+      //     const projectId = this.state.id;
+      //     window.location.replace(`#/projects/${projectId}`);
+      //     window.location.reload();
+      //     return false;
+      //   }
+      // } else {
+      //   window.location.reload();
+      //   return false;
     }
   }
 
