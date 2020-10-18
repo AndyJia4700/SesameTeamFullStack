@@ -70,9 +70,6 @@
   border-radius: 25px;
 }
 
-.project-form-role-li:hover {
-  background: #ff9800;
-}
 
 .project-form-role-span1 {
   font-weight: bold;
@@ -97,6 +94,25 @@
   padding: 10px;
   border-radius: 10px;
   margin: 5px;
+}
+
+.project-form-tag-search-li{
+  display: block;
+}
+
+.project-form-tag-search-li:hover{
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.project-form-tag-search-ul{
+  overflow: scroll;
+  padding: 10px;
+  height: 150px;
+  width: 230px;
+  border-radius: 10px;
+  background: #f3f3f3;
+
 }
 
 .project-form-title-div {

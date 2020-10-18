@@ -24,16 +24,6 @@ class ProjectForm extends React.Component {
   addTag(e) {
     e.preventDefault();
     const addedTag = document.getElementById("tag_input").value;
-    const propWord = ["a", "about", "an", "and", "are", "but", "for", "in", "into", "is", "of", "on", "or", "out", "the", "to", "with", "without"]
-    const inputTag = addedTag
-      .split(" ")
-      .map((word) =>
-        propWord.includes(word)
-          ? word
-          : word[0].toUpperCase() + word.substring(1)
-      )
-      .join(" ");
-
     if (Number(addedTag)) {
       alert("please don't use a number as this tag");
       return null;
@@ -45,6 +35,16 @@ class ProjectForm extends React.Component {
       alert("no comma allowed here");
       return null;
     }
+    
+    const propWord = ["a", "about", "an", "and", "are", "but", "for", "in", "into", "is", "of", "on", "or", "out", "the", "to", "with", "without"]
+    const inputTag = addedTag
+      .split(" ")
+      .map((word) =>
+        propWord.includes(word)
+          ? word
+          : word[0].toUpperCase() + word.substring(1)
+      )
+      .join(" ");
 
     const tagArr = Object.values(this.state.tag_id).map((id) =>
       this.props.tags[id] ? this.props.tags[id].tag_name : id
@@ -268,7 +268,7 @@ class ProjectForm extends React.Component {
     let tagSearchKey = this.state.search.toLowerCase();
     const tagHint = Object.values(this.props.tags).map((tag) => {
       if (tag.tag_name && tag.tag_name.toLowerCase().includes(tagSearchKey)) {
-        return <li key={tag.id} onClick={() => document.getElementById("tag_input").value = tag.tag_name}>{tag.tag_name}</li>;
+        return <li key={tag.id} className="project-form-tag-search-li" onClick={() => document.getElementById("tag_input").value = tag.tag_name}>{tag.tag_name}</li>;
       }
     });
 
@@ -287,7 +287,9 @@ class ProjectForm extends React.Component {
         ))}
         <div>
           <li className="profile-tag-li-input">{tagInput}</li>
-          <ul>{tagHint}</ul>
+          <ul className="project-form-tag-search-ul">
+            {tagHint}
+          </ul>
         </div>
       </ul>
     );

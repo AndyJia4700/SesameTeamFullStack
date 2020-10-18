@@ -29,6 +29,10 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'annotate'
 gem 'aws-sdk-s3'
 gem 'jquery-rails'
+
+gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: '5.x'
+gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '5.x'
+gem 'searchkick'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 # gem 'strong_parameters'

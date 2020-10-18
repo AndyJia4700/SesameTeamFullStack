@@ -1,4 +1,5 @@
 import React from 'react';
+import { FiSearch } from 'react-icons/fi'
 import { AuthRoute, ProtRoute } from '../util/route_utils';
 import { Route } from 'react-router-dom';
 import LogInForm from '../components/session/login_form'
@@ -26,6 +27,11 @@ class App extends React.Component{
               <a href="#/">
                 <img src={window.sesameteamwordURL} />
               </a>
+            </div>
+
+            <div>
+              <FiSearch />
+              <input type="text" placeholder="search" />
             </div>
 
             <div className="nav-top-element">
