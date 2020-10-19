@@ -29,10 +29,10 @@ class App extends React.Component{
               </a>
             </div>
 
-            <div>
+            {/* <div>
               <FiSearch />
               <input type="text" placeholder="search" />
-            </div>
+            </div> */}
 
             <div className="nav-top-element">
               <SessionShow />

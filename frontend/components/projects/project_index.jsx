@@ -30,25 +30,38 @@ class ProjectIndex extends React.Component{
       search: "",
     };
     this.tagAttached = this.tagAttached.bind(this);
+    this.tagRemove = this.tagRemove.bind(this);
     this.update = this.update.bind(this);
     this.updateHistory = this.updateHistory.bind(this);
   }
 
   componentDidMount(){
-    debugger
+    // debugger
     this.props.fetchTags();
     const query = this.props.location.search
     this.props.fetchProjects(query);
   }
 
-  tagAttached(e){
-    e.preventDefault();
-    const newVal = this.state.tagArr.concat(e.currentTarget.value)
-    if (!this.state.tagArr.includes(e.currentTarget.value)){
+  tagAttached(value){
+    if (this.state.tagArr.length > 3) return null;
+    const val = parseInt(value);
+    const newVal = this.state.tagArr.concat(val);
+    document.getElementById("tag-filter").value = "";
+
+    if (!this.state.tagArr.includes(val)){
       return this.setState({
         tagArr: newVal
       });
     }
+  }
+
+  tagRemove(value){
+    const removeTag = this.state.tagArr.filter(
+      id => id != value
+    )
+    return this.setState({
+      tagArr: removeTag
+    })
   }
 
   update(field){
@@ -66,28 +79,23 @@ class ProjectIndex extends React.Component{
   }
 
   render(){
-    // debugger
+
     const mainSearch = (
-      <div>
+      <div className="project-index-main-search-div">
         <input 
           type="text"
           id="main-search"
           placeholder="What's in your mind?"
         />
-        <span onClick={this.updateHistory}><FiSearch/></span>
+        <span onClick={this.updateHistory} className="project-index-main-search-span">
+          <FiSearch/>
+        </span>
       </div>
     );
-    const {projects, tags} = this.props;
+    
+    if (!Object.values(this.props.tags)[0])return null;
 
-    // const tagList = Object.values(tags).map( tag => 
-    //   <li 
-    //     key={tag.id}
-    //     id={"tag"+tag.id}
-    //     value={tag.id}
-    //     onClick={this.tagAttached}> 
-    //     {tag.tag_name}
-    //   </li>
-    // );
+    const {projects, tags} = this.props;
 
     let projectList;
     const projectF1 = projects.filter(project =>
@@ -108,33 +116,53 @@ class ProjectIndex extends React.Component{
     projectList = this.state.tagArr[2] ? projectF3 : projectList;
     projectList = this.state.tagArr[3] ? projectF4 : projectList;
 
-
-    // debugger;
     const tagFilter = this.state.tagArr.map(tagId =>
-      <li key={tagId*2}>
-        {this.props.tags[tagId].tag_name}
-        <span>
+      <li key={tagId*2} className="project-index-tagfilter-li">
+        {tags[tagId].tag_name}
+        <span onClick={() => this.tagRemove(tagId)}>
           &times;
         </span>
       </li>
     )
     
     const tagInput = (
-      <div>
-        <input 
-          type="text"
-          id="tag-filter"
-          placeholder="Filter Input"
-          onChange={this.update("search")}
-        />
-        <span onClick={this.tagAttached}>
-          <FiCheck/>
-        </span>
-      </div>
+      <input 
+        type="text"
+        id="tag-filter"
+        placeholder="Filter Input"
+        onChange={this.update("search")}
+      />
     );
 
-    
+    let tagSearchKey = this.state.search.toLowerCase();
+    const tagHint = Object.values(this.props.tags).map((tag) => {
+      if (tag.tag_name && tag.tag_name.toLowerCase().includes(tagSearchKey)) {
+        return (
+        <li 
+          key={tag.id} 
+          className="project-form-tag-search-li" 
+          onClick={() => this.tagAttached(tag.id)}
+        >
+          {tag.tag_name}
+        </li>
+        )
+      }
+    });
 
+    const filterSection = (
+      <div>
+        <ul className="project-index-tagfilter-ul">
+          {tagFilter}
+          {tagInput}
+        </ul>
+
+        <ul className="project-index-search-hint-ul">
+          {tagHint}
+        </ul>
+      </div>
+    )
+
+    // debugger
     const resultList = projectList.map(project =>
       <li key={project.id}>
         <Link to={`/projects/${project.id}`}>
@@ -154,13 +182,10 @@ class ProjectIndex extends React.Component{
     );
 
     return (
-      <div className="profile-index-main-div">
-        {mainSearch}
-        <div>{this.state.tagArr}</div>
-        {/* <ul>{tagList}</ul> */}
-        <div>
-          <ul>{tagFilter}</ul>
-          {tagInput}
+      <div className="project-index-main-div">
+        <div className="project-index-search-div">
+          {mainSearch}
+          {filterSection}
         </div>
         <ul>{resultList}</ul>
       </div>
