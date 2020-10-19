@@ -1,10 +1,16 @@
-export const fetchProjects = () =>
-  $.ajax({
-    url: "/api/projects",
-  });
+export const fetchProjects = (query) =>{
+  if (!query){
+    return $.ajax({
+      url: `/api/projects`,
+    });
+  } else {
+    return $.ajax({
+      url: `/api/projects?title=${query}`,
+    });
+  }
+};
 
 export const fetchProject = (projectId) => {
-  // debugger;
   return $.ajax({
     url: `/api/projects/${projectId}`,
   });

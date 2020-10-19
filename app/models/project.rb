@@ -13,11 +13,16 @@
 #  updated_at          :datetime         not null
 #  leader_id           :integer
 #
-# require 'elasticsearch/model'
 class Project < ApplicationRecord
-    # include Elasticsearch::Model
-    # include Elasticsearch::Model::Callbacks
-    searchkick
+
+    searchkick text_start: [
+        :project_title, 
+        # :tag_id,
+        :role
+    ]
+
+    # searchkick match: :word_start, searchable: [:project_title]
+
     validates :project_title, presence: true, uniqueness: true
     
     belongs_to :leader,
@@ -28,13 +33,16 @@ class Project < ApplicationRecord
 
     def search_data
         {
-            project_title: project_title
+            project_title: project_title,
+            # tag_id: tag_id,
+            role: role,
         }
     end
+    Project.reindex
 
-    # scope :search_import, -> { includes(:leader) }
 end
 
+# Project.reindex
 # Project.__elasticsearch__.create_index!
 # Project.import
 

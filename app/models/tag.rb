@@ -9,5 +9,10 @@
 #
 class Tag < ApplicationRecord
     validates :tag_name, presence: true, uniqueness: true
-
+    searchkick
+    def search_data
+        {
+            tag_name: tag_name
+        }
+    end
 end

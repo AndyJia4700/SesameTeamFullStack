@@ -19,8 +19,8 @@ const removeProject = (projectId) => ({
   projectId,
 });
 
-export const fetchProjects = () => (dispatch) =>
-  ProjectUtil.fetchProjects().then((projects) =>
+export const fetchProjects = (query) => (dispatch) =>
+  ProjectUtil.fetchProjects(query).then((projects) =>
     dispatch(receiveAllProjects(projects))
   );
 

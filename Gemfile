@@ -30,8 +30,8 @@ gem 'annotate'
 gem 'aws-sdk-s3'
 gem 'jquery-rails'
 
-gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: '5.x'
-gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '5.x'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 gem 'searchkick'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
