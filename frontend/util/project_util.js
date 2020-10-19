@@ -1,8 +1,13 @@
 export const fetchProjects = (query) =>{
-  // debugger
-  return $.ajax({
-    url: `/api/projects?title=${query}`,
-  });
+  if (!query){
+    return $.ajax({
+      url: `/api/projects`,
+    });
+  } else {
+    return $.ajax({
+      url: `/api/projects?title=${query}`,
+    });
+  }
 };
 
 export const fetchProject = (projectId) => {

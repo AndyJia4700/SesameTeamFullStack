@@ -3,12 +3,13 @@ class Api::ProjectsController < ApplicationController
     skip_before_action :verify_authenticity_token
 
     def index
-        
         # @projects = Project.all.includes(:leader)
         query = params[:title].presence || "*"
         # query = params[{title: :exact}].presence || "*"
         # debugger
-        @projects = Project.search(query, fields:[{tag_id: :exact}]).results
+        # @projects = Project.search(query, :project_title, :role, fields:[{tag_id: :exact}]).results
+        @projects = Project.search(query).results
+
 
         render :index
     end

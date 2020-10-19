@@ -16,9 +16,9 @@
 class Project < ApplicationRecord
 
     searchkick text_start: [
-        # :project_title, 
-        :tag_id,
-        # :role
+        :project_title, 
+        # :tag_id,
+        :role
     ]
 
     # searchkick match: :word_start, searchable: [:project_title]
@@ -33,9 +33,9 @@ class Project < ApplicationRecord
 
     def search_data
         {
-            # project_title: project_title,
-            tag_id: tag_id,
-            # role: role,
+            project_title: project_title,
+            # tag_id: tag_id,
+            role: role,
         }
     end
     Project.reindex
