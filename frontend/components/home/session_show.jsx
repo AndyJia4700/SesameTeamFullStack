@@ -15,11 +15,12 @@ const SessionShow = ({currentUser, openModal}) => {
             <Link to="/login" className="">Log in</Link>
     );
     
-    const name = (currentUser && currentUser.first_name) ? currentUser.first_name : "User"
+    // const name = (currentUser && currentUser.first_name) ? currentUser.first_name : "User"
+    const photo = (currentUser && currentUser.photoUrl) ? <img src={currentUser.photoUrl} className="tiny-photo"/> : <img className="tiny-no-photo"/>
     
     const greeting = () => (
         <a onClick={() => openModal('profileDropDown')}>
-            Hello, {name}
+            {photo}
         </a>
     );
 

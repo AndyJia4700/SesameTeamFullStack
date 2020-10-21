@@ -1,6 +1,7 @@
 # == Schema Information
 #
 # Table name: users
+#
 #  id              :bigint           not null, primary key
 #  email           :string           not null
 #  session_token   :string           not null
@@ -17,6 +18,9 @@
 #  skill           :string           default([]), is an Array
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  wallet          :integer
+#  friends_id      :integer          default([]), is an Array
+#  likes_id        :integer          default([]), is an Array
 #
 class User < ApplicationRecord
     validates :email, :password_digest, :session_token, presence: true
@@ -27,7 +31,18 @@ class User < ApplicationRecord
 
     has_many :projects,
     foreign_key: :leader_id,
-    class_name: "Project"
+    class_name: "Project",
+    dependent: :destroy
+
+    has_many :servers,
+    foreign_key: :owner_id,
+    class_name: "Server",
+    dependent: :destroy
+
+    has_many :messages,
+    foreign_key: :author_id,
+    class_name: "Message",
+    dependent: :destroy
 
 
     has_one_attached :photo

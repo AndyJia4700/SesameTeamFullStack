@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { closeModal } from '../../actions/modal_actions';
 import { logout } from '../../actions/session_actions';
 import ProfileDropDown from '../users/profile_dropdown';
+import LiveChat from '../message/livechat';
 
 const mSTP = state => {
     return {
@@ -22,6 +23,9 @@ function Modal ({modal, closeModal}){
     switch(modal){
         case 'profileDropDown':
             component = <ProfileDropDown closeModal={closeModal}/>;
+            break;
+        case 'messageBox':
+            component = <LiveChat closeModal={closeModal}/>;
             break;
         default:
             return null;

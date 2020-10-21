@@ -1,0 +1,26 @@
+.message-livechat-form{
+    position: absolute;
+    bottom: 0;
+}
+
+.message-livechat-main-div{
+    position: fixed;
+    background: #e06a6a;
+    width: 600px;
+    height: 500px;
+    padding: 30px;
+    border-radius: 25px;
+    font-size: 25px;
+}
+
+.message-logo{
+    position: fixed;
+    right: 3%;
+    bottom: 3%;
+    font-size: 40px;
+}
+
+#message-input{
+    border: 1px solid;
+}
+

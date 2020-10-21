@@ -18,6 +18,9 @@
 #  skill           :string           default([]), is an Array
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  wallet          :integer
+#  friends_id      :integer          default([]), is an Array
+#  likes_id        :integer          default([]), is an Array
 #
 require 'test_helper'
 
