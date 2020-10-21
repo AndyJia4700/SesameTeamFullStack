@@ -1,7 +1,8 @@
 import React from 'react';
-import { FiSearch } from 'react-icons/fi'
 import { AuthRoute, ProtRoute } from '../util/route_utils';
 import { Route } from 'react-router-dom';
+
+import Footer from './home/footer';
 import LogInForm from '../components/session/login_form'
 import Modal from './modal/modal';
 import SessionShow from './home/session_show';
@@ -41,9 +42,7 @@ class App extends React.Component{
         );
 
         const footer = (
-          <div>
-            This is footer
-          </div>
+          <Footer/>
         );
 
         return (
@@ -73,7 +72,7 @@ class App extends React.Component{
               <AuthRoute path="/login" component={LogInForm} />
             </div>
 
-            {/* {footer} */}
+            {footer}
           </div>
         );
     }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_09_022848) do
+ActiveRecord::Schema.define(version: 2020_10_20_212349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,22 @@ ActiveRecord::Schema.define(version: 2020_10_09_022848) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "channels", force: :cascade do |t|
+    t.string "channel_name"
+    t.integer "server_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_name"], name: "index_channels_on_channel_name"
+    t.index ["server_id"], name: "index_channels_on_server_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.integer "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "project_title", null: false
     t.text "project_description"
@@ -46,6 +62,15 @@ ActiveRecord::Schema.define(version: 2020_10_09_022848) do
     t.datetime "updated_at", null: false
     t.integer "leader_id"
     t.index ["project_title"], name: "index_projects_on_project_title", unique: true
+  end
+
+  create_table "servers", force: :cascade do |t|
+    t.string "server_name"
+    t.integer "owner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_servers_on_owner_id"
+    t.index ["server_name"], name: "index_servers_on_server_name"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -71,6 +96,9 @@ ActiveRecord::Schema.define(version: 2020_10_09_022848) do
     t.string "skill", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "wallet"
+    t.integer "friends_id", default: [], array: true
+    t.integer "likes_id", default: [], array: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
   end
