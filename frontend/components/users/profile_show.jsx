@@ -98,10 +98,10 @@ class ProfileShow extends React.Component{
 
     const projectLists = projects.map((project) => (
       project.leader_id == user.id ? (
-      <li key={project.id} className="project-index-li">
+      <li key={project.id} className="profile-show-project-li">
         <Link to={`/projects/${project.id}`}>
-          <p>{project.project_title}</p>
-          <img src={project.pictureUrl} className="project-index-li-img" />
+          <p className="profile-show-project-p">{project.project_title}</p>
+          <img src={project.pictureUrl} className="profile-show-project-img" />
         </Link>
       </li>) : null
     ));
@@ -143,10 +143,13 @@ class ProfileShow extends React.Component{
             <span>{interest}</span>
           </li>
         </ul>
-        <ul>
+
+        <div className="profile-show-project-div">
           <label className="profile-element-lable">Lead Project:</label>
-          {projectLists}
-        </ul>
+          <ul className="profile-show-project-ul">
+            {projectLists}
+          </ul>
+        </div>
       </div>
     );
   }
