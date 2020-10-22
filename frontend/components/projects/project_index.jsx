@@ -164,19 +164,22 @@ class ProjectIndex extends React.Component{
 
     // debugger
     const resultList = projectList.map(project =>
-      <li key={project.id}>
-        <Link to={`/projects/${project.id}`}>
+      <li key={project.id} >
+        <Link to={`/projects/${project.id}`} className="project-index-result-li">
           <img src={project.pictureUrl} className="project-index-li-img" />
-          <p>{project.project_title}</p>
-          <ul>
-            {
-              project.tag_id.map(id => 
-                <li key={id} className="project-form-tag-li">
-                  {this.props.tags[id].tag_name}
-                </li>
-              )
-            }
-          </ul>
+          <div className="project-index-result-li-div">
+            <p className="project-index-result-li-div-title">{project.project_title}</p>
+            <p className="project-index-result-li-div-description">{project.project_description}</p>
+            <ul>
+              {
+                project.tag_id.map(id => 
+                  <li key={id} className="project-form-tag-li">
+                    {this.props.tags[id].tag_name}
+                  </li>
+                )
+              }
+            </ul>
+          </div>
         </Link>
       </li>
     );
@@ -187,7 +190,9 @@ class ProjectIndex extends React.Component{
           {mainSearch}
           {filterSection}
         </div>
-        <ul>{resultList}</ul>
+        <ul className="project-index-project-ul">
+          {resultList}
+        </ul>
       </div>
     );
   }

@@ -148,6 +148,7 @@
   padding: 5%;
   display: flex;
   flex-direction: row;
+  background: #f3f3f3;
 }
 
 .project-index-main-search-div{
@@ -163,8 +164,36 @@
   top: 3px;
 }
 
+.project-index-project-ul{
+  display: flex;
+  flex-direction: column;
+}
+
+.project-index-result-li{
+  display: flex;
+  flex-direction: row;
+  padding: 5%;
+  background: white;
+  border-radius: 25px;
+  margin-bottom: 20px;
+}
+
+.project-index-result-li-div{
+  padding-left: 5%;
+}
+
+.project-index-result-li-div-title{
+  font-size: 25px;;
+}
+
+.project-index-result-li-div-description{
+  font-size: 20px;
+  padding-bottom: 20px;
+}
+
 .project-index-search-div{
-  border: 1px solid black;
+  background: white;
+  border: 1px solid gray;
   height: 100%;
   margin-right: 5%;
   padding: 3%;
