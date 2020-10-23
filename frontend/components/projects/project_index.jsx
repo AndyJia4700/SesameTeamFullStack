@@ -161,8 +161,7 @@ class ProjectIndex extends React.Component{
         </ul>
       </div>
     )
-
-    // debugger
+    
     const resultList = projectList.map(project =>
       <li key={project.id} >
         <Link to={`/projects/${project.id}`} className="project-index-result-li">
