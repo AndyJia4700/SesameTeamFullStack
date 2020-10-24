@@ -6,7 +6,6 @@ import { fetchTags } from "../../actions/tag_actions";
 import { FiCheck, FiSearch } from "react-icons/fi"
 
 const mSTP = state => {
-  // debugger
   return {
     projects: Object.values(state.entities.projects),
     tags: state.entities.tags
@@ -14,7 +13,6 @@ const mSTP = state => {
 }
 
 const mDTP = dispatch => {
-  // debugger
   return {
     fetchProjects: (query) => dispatch(fetchProjects(query)),
     fetchTags: () => dispatch(fetchTags()),
@@ -161,7 +159,7 @@ class ProjectIndex extends React.Component{
         </ul>
       </div>
     )
-    
+
     const resultList = projectList.map(project =>
       <li key={project.id} >
         <Link to={`/projects/${project.id}`} className="project-index-result-li">
