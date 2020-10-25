@@ -16,7 +16,6 @@ class Project < ApplicationRecord
 
     searchkick text_start: [
         :project_title, 
-        # :tag_id,
         :role
     ]
 
@@ -29,20 +28,14 @@ class Project < ApplicationRecord
     class_name: "User"
 
     has_one_attached :picture
+    # has_many_attached :picture
 
     def search_data
         {
             project_title: project_title,
-            # tag_id: tag_id,
             role: role,
         }
     end
     Project.reindex
 
 end
-
-# Project.reindex
-# Project.__elasticsearch__.create_index!
-# Project.import
-
-# @projects = Project.search('*').records
