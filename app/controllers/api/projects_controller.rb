@@ -89,6 +89,7 @@ class Api::ProjectsController < ApplicationController
             :leader_id,
             :tag_id,
             :picture
+            # pictures: []
         )
     end
 end
