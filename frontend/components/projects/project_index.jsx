@@ -116,7 +116,8 @@ class ProjectIndex extends React.Component{
 
     const tagFilter = this.state.tagArr.map(tagId =>
       <li key={tagId*2} className="project-index-tagfilter-li">
-        {tags[tagId].tag_name}
+        {tags[tagId].tag_name + '  '}
+
         <span onClick={() => this.tagRemove(tagId)}>
           &times;
         </span>
@@ -127,8 +128,9 @@ class ProjectIndex extends React.Component{
       <input 
         type="text"
         id="tag-filter"
-        placeholder="Filter Input"
+        placeholder="Filter Input limit 4"
         onChange={this.update("search")}
+        // onClick={() => document.getElementById('tagHint').style.display = "inline"}
       />
     );
 
@@ -147,26 +149,14 @@ class ProjectIndex extends React.Component{
       }
     });
 
-    const filterSection = (
-      <div>
-        <ul className="project-index-tagfilter-ul">
-          {tagFilter}
-          {tagInput}
-        </ul>
-
-        <ul className="project-index-search-hint-ul">
-          {tagHint}
-        </ul>
-      </div>
-    )
-
     const resultList = projectList.map(project =>
       <li key={project.id} >
         <Link to={`/projects/${project.id}`} className="project-index-result-li">
           <img src={project.pictureUrl} className="project-index-li-img" />
           <div className="project-index-result-li-div">
             <p className="project-index-result-li-div-title">{project.project_title}</p>
-            <p className="project-index-result-li-div-description">{project.project_description}</p>
+            {/* <p className="project-index-result-li-div-description">{project.project_description}</p> */}
+            
             <ul>
               {
                 project.tag_id.map(id => 
@@ -182,14 +172,27 @@ class ProjectIndex extends React.Component{
     );
 
     return (
-      <div className="project-index-main-div">
+      <div>
         <div className="project-index-search-div">
-          {mainSearch}
-          {filterSection}
+            {mainSearch}
+
+            <ul className="project-index-tagfilter-ul">
+            {tagFilter}
+            </ul>
+
+            <div>{tagInput}
+              <ul id="tagHint" className="project-index-search-hint-ul">
+                {tagHint}
+              </ul>
+            </div>
+
+          </div>
+
+        <div className="project-index-main-div">
+          <ul className="project-index-project-ul">
+            {resultList}
+          </ul>
         </div>
-        <ul className="project-index-project-ul">
-          {resultList}
-        </ul>
       </div>
     );
   }

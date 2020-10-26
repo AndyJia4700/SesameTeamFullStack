@@ -14,7 +14,20 @@ class SplashPage extends React.Component{
     render(){
         return (
             <div>
-                this is Splash page
+                <img src={window.sesameteamURL} className="sesameteam-logo"/>
+                <h4>
+                    Welcome to Sesame Team.
+                    <br/>
+                    The idea of this site is to build team portfolio together. 
+                    <br/>
+                    You can bring an idea and 
+                    <br/>
+                    Just explore any topic you may interest, and connect leader to join his/her project.
+                    <br/>
+                    
+                    
+                </h4>
+            
             </div>
         )
     }

@@ -20,18 +20,21 @@
     flex-direction: column;
     text-align: center;
     background-color: #f7f7f7;
-    width: 300px;
+    width: 295px;
     border-radius: 25px;
     color: #403c23;
     font-size: 25px;
-    box-shadow: 10px 10px 5px #aaaaaa;
+    border: 1px solid;
+}
 
+.modal-child-div:hover{
+    box-shadow: 10px 10px 5px #aaaaaa;
 }
 
 .modal-child-div-button{
     border: 1px solid #dcdcdc;
     border-radius: 25px;
-    padding: 5px 15px 5px 15px;  
+    padding: 5px 25px 5px 25px;  
 }
 
 .modal-child-div-button:hover{
