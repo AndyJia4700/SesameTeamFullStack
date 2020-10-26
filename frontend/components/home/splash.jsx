@@ -20,7 +20,7 @@ class SplashPage extends React.Component{
                     <br/>
                     The idea of this site is to build team portfolio together. 
                     <br/>
-                    You can bring an idea and 
+                    You can post an idea and see who wants to work on your project.
                     <br/>
                     Just explore any topic you may interest, and connect leader to join his/her project.
                     <br/>
