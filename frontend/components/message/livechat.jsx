@@ -19,6 +19,8 @@ class liveChat extends React.Component{
             <div id="message-container" className="message-livechat-main-div">
                 {/* <Server/>
                 <Script/> */}
+                <p>Live Chat </p>
+                <p>Coming Soon</p>
                 
                 <form id="send-container" className="message-livechat-form">
                     <input type="text"
