@@ -50,5 +50,9 @@
   "devDependencies": {
     "nodemon": "^2.0.6",
     "react-socket-io": "^0.2.5"
+  },
+  "engines": {
+    "node": "10.13.0",
+    "npm": "6.14.8"
   }
 }
