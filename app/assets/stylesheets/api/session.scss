@@ -1,0 +1,73 @@
+.sesameteam-logo{
+    width: 200px;
+    padding-bottom: 50px;
+}
+
+.sign-log-errors-box{
+    font-size: 20px;
+    color: red;
+    padding-bottom: 5px;
+}
+
+.sign-log-button{
+    width: 250px;
+    border-radius: 25px;
+    font-size: 25px;
+    padding: 5px;
+    text-align: center;
+    background: #15b4f5;
+    color: white;
+    border: 3px solid black;
+    outline: none;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.demo{
+    background-color: blueviolet;
+}
+
+.sign-log-button:hover{
+    opacity: 0.8;
+}
+
+.sign-log-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid black;
+    border-radius: 25px;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 3%;
+    padding: 50px;
+    box-shadow: 0 10px 10px 0 #caafaf;
+}
+
+.sign-log-input{
+    width: 250px;
+    font-size: 25px;
+    color: green;
+    margin-bottom: 15px;
+    border-radius: 25px;
+    padding: 5px;
+    padding-left: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    border: none;
+    outline: none;
+}
+
+.sign-log-input:focus{
+    border: 3px solid black;
+}
+
+.sign-log-span{
+    color: #f4065d;
+}
+
+.sign-log-switch{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 20px;
+}
+
+
