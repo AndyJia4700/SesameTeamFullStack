@@ -33,7 +33,6 @@ gem 'jquery-rails'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'searchkick'
-gem 'sqlite3'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 # gem 'strong_parameters'
