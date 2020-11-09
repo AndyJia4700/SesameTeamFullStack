@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 class SplashPage extends React.Component{
     render(){
         return (
-            <div>
+            <div className="splash-main-div">
                 <img src={window.sesameteamURL} className="sesameteam-logo"/>
                 <h4>
                     Welcome to Sesame Team.
